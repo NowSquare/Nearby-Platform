@@ -1,0 +1,57 @@
+
+/*
+ * Social buttons
+ */
+
+$social-list: (
+  "twitter": #55ACEE,
+  "facebook": #3B5998,
+  "gplus": #DD4B39,
+  "linkedin": #0976B4,
+  "pinterest": #CC2127,
+  "youtube": #E52D27,
+  "tumblr": #35465C,
+  "github": #333333,
+  "behance": #1769FF,
+  "dribbble": #EA4C89,
+  "reddit": #FF4500,
+);
+
+@each $social in $social-list {
+
+  $social-name: nth($social, 1);
+  $social-color: nth($social, 2);
+
+  .btn-#{$social-name} {
+    @include button-variant($social-color, $social-color, darken($social-color, 7.5%), darken($social-color, 10%));
+  }
+
+  .btn-#{$social-name}:focus {
+    color: #fff;
+  }
+
+  .btn-outline-#{$social-name} {
+    @include button-size(calc(.5rem - 1px), calc(1rem - 1px), $font-size-base, $input-btn-line-height, $btn-border-radius);
+    border-width: 2px;
+  }
+
+  .btn-outline-#{$social-name}.btn-sm {
+    @include button-size(calc(.25rem - 1px), calc(.5rem - 1px), $font-size-sm, $input-btn-line-height-sm, $btn-border-radius-sm);
+  }
+
+  .btn-outline-#{$social-name}.btn-lg {
+    @include button-size(calc(.75rem - 1px), calc(1.5rem - 1px), $font-size-lg, $input-btn-line-height-lg, $btn-border-radius-lg);
+  }
+
+  .btn-outline-#{$social-name}.btn-xlg {
+    @include button-size(calc(1.25rem - 1px), calc(2rem - 1px), 1.75rem, $input-btn-line-height-lg, $btn-border-radius-lg);
+  }
+
+  .btn-outline-#{$social-name}:focus {
+    color: $social-color;
+  }
+
+  .btn-outline-#{$social-name}:hover {
+    color: #fff;
+  }
+}

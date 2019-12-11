@@ -1,0 +1,16 @@
+body {
+  padding: 0.5rem !important;
+}
+body,
+table td,
+table th {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+p:first-of-type {
+  margin-top: 0 !important;
+}
+strong {
+  font-weight: 400;
+}

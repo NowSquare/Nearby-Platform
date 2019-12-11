@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /password/reset
+Disallow: /legal
+Disallow: /privacy-policy

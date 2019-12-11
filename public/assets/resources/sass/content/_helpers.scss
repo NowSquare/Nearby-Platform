@@ -1,0 +1,113 @@
+
+/*
+ * Various generic helper classes
+ */
+
+/* Material shadows */
+
+$mdl-shadow--2dp: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !default;
+$mdl-shadow--3dp: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 1px 8px 0 rgba(0, 0, 0, 0.12) !default;
+$mdl-shadow--4dp: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2) !default;
+$mdl-shadow--6dp: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.2) !default;
+$mdl-shadow--8dp: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2) !default;
+$mdl-shadow--16dp: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2) !default;
+$mdl-shadow--xlarge: 0 26px 34px 5px rgba(0, 0, 0, 0.02), 0 12px 40px 7px rgba(0, 0, 0, 0.06), 0 12px 20px -7px rgba(0, 0, 0, 0.1) !default;
+
+.mdl-shadow--2dp { box-shadow: $mdl-shadow--2dp; }
+.mdl-shadow--3dp { box-shadow: $mdl-shadow--3dp; }
+.mdl-shadow--4dp { box-shadow: $mdl-shadow--4dp; }
+.mdl-shadow--6dp { box-shadow: $mdl-shadow--6dp; }
+.mdl-shadow--8dp { box-shadow: $mdl-shadow--8dp; }
+.mdl-shadow--16dp { box-shadow: $mdl-shadow--16dp; }
+.mdl-shadow--xlarge { box-shadow: $mdl-shadow--xlarge; }
+
+/* Image helpers */
+
+img.round {
+  border-radius: 50%;
+}
+
+.bg-img {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover !important;
+  background-position: 50% 50% !important;
+  background-repeat: no-repeat;
+/*
+  position: relative;
+  background-size: cover;
+  background-position: center center;*/
+  img {
+    max-width: 100%;
+  }
+}
+
+/* Min height */
+
+$min-height-list: 100, 200, 300, 400, 500, 600;
+
+@each $min-height in $min-height-list {
+  .min-height-#{$min-height} {
+    min-height: $min-height + unquote("px") !important;
+  }
+
+  @include media-breakpoint-down(sm) {
+    .min-height-#{$min-height} {
+      min-height: ($min-height / 2) + unquote("px") !important;
+    }
+  }
+}
+
+/* Max height */
+
+$max-height-list: 100, 200, 300, 400, 500, 600;
+
+@each $max-height in $max-height-list {
+  .max-height-#{$max-height} {
+    max-height: $max-height + unquote("px") !important;
+  }
+
+  @include media-breakpoint-down(sm) {
+    .max-height-#{$max-height} {
+      max-height: ($max-height / 2) + unquote("px") !important;
+    }
+  }
+}
+
+/* Min width */
+
+$min-width-list: 30, 40, 50, 60, 70, 80, 90, 100, 200, 300, 400, 500, 600;
+
+@each $min-width in $min-width-list {
+  .min-width-#{$min-width} {
+    min-width: $min-width + unquote("px") !important;
+  }
+/*
+  @include media-breakpoint-down(sm) {
+    .min-width-#{$min-width} {
+      min-width: ($min-width / 2) + unquote("px") !important;
+    }
+  }
+  */
+}
+
+/* Max width */
+
+$max-width-list: 30, 40, 50, 60, 70, 80, 90, 100, 200, 300, 400, 500, 600;
+
+@each $max-width in $max-width-list {
+  .max-width-#{$max-width} {
+    max-width: $max-width + unquote("px") !important;
+  }
+/*
+  @include media-breakpoint-down(sm) {
+    .max-width-#{$max-width} {
+      max-width: ($max-width / 2) + unquote("px") !important;
+    }
+  }
+  */
+}

@@ -1,0 +1,165 @@
+/*
+ * Variables
+ */
+
+/* Default Bootstrap variables for use with mixins and extensions */
+
+@import "../../../bower_components/bootstrap/scss/functions";
+@import "../../../bower_components/bootstrap/scss/variables";
+
+/* Google Material colors https://github.com/mrmlnc/material-color */
+
+@import "../../../bower_components/material-color/material-color";
+
+/* Generic variables */
+
+$btn-ghost-color: rgba(255,255,255,0.8) !default;
+$btn-dark-ghost-color: rgba(0,0,0,0.8) !default;
+
+$light-color: #fff !default;
+$dark-color: #333 !default;
+
+$link-color-light: #f6f6f6 !default;
+$link-color-dark: $clr-blue-700 !default;
+
+
+/* Available colors, you can remove unused colors to reduce CSS file size */
+/*
+$color-list: (
+  "red":         $clr-red,
+  "pink":        $clr-pink,
+  "purple":      $clr-purple,
+  "deep-purple": $clr-deep-purple,
+  "indigo":      $clr-indigo,
+  "blue":        $clr-blue,
+  "light-blue":  $clr-light-blue,
+  "cyan":        $clr-cyan,
+  "teal":        $clr-teal,
+  "green":       $clr-green,
+  "light-green": $clr-light-green,
+  "lime":        $clr-lime,
+  "yellow":      $clr-yellow,
+  "amber":       $clr-amber,
+  "orange":      $clr-orange,
+  "deep-orange": $clr-deep-orange,
+  "brown":       $clr-brown,
+  "grey":        $clr-grey,
+  "blue-grey":   $clr-blue-grey
+);
+*/
+$color-list: (
+  "red":         $clr-red,
+  "pink":        $clr-pink,
+  "purple":      #5533ff,
+  "deep-purple": $clr-deep-purple,
+  "indigo":      $clr-indigo,
+  "blue":        #1d8ccc,
+  "light-blue":  $clr-light-blue,
+  "cyan":        $clr-cyan,
+  "teal":        $clr-teal,
+  "green":       $clr-green,
+  "light-green": $clr-light-green,
+  "lime":        $clr-lime,
+  "yellow":      $clr-yellow,
+  "amber":       $clr-amber,
+  "orange":      $clr-orange,
+  "deep-orange": $clr-deep-orange,
+  "brown":       $clr-brown,
+  "grey":        $clr-grey,
+  "blue-grey":   $clr-blue-grey,
+  "light-grey":  #f7f7f7,
+  "success":     #58bd24,
+  "danger":      #ff4141,
+  "primary":     #146eff,
+  "info":        #35A3FF
+);
+
+/* $theme-colors: map-merge($color-list, $theme-colors);*/
+
+$primary-color: $clr-blue-400 !default;
+
+/*
+ * Bootstrap mixins
+ */
+
+$enable-shadows: false;
+$enable-transitions: false;
+
+@import "../../../bower_components/bootstrap/scss/mixins";
+
+/*
+ * Generic content style
+ */
+
+@import "content/helpers";
+@import "content/typography";
+@import "content/colors";
+@import "content/icons";
+
+/*
+ * UI components
+ */
+
+@import "components/header";
+//@import "components/jumbotron";
+@import "components/content";
+@import "components/photos";
+@import "components/navbar";
+//@import "components/form";
+@import "components/footer";
+@import "components/buttons";
+@import "components/lists";
+@import "components/modal";
+//@import "components/social";
+@import "components/pricing";
+@import "components/breadcrumbs";
+@import "components/cards";
+
+/*
+ * Plugins
+ */
+
+@import "plugins/notify-metro";
+@import "plugins/ekko-lightbox";
+@import "plugins/sweet-alert2";
+@import "plugins/fss";
+@import "plugins/spinthatshit";
+@import "plugins/owl.carousel.theme";
+@import "plugins/select2/layout";
+@import "plugins/select2-xl/layout";
+
+/*
+ * Fonts
+ */
+
+//@import "fonts/font-awesome";
+@import "fonts/material-icons";
+
+/*
+ * Animate with Sass
+ */
+
+@import "../../../bower_components/animatewithsass/_properties";
+@import "../../../bower_components/animatewithsass/_fading-entrances/_fadeInDown.scss";
+
+/* Slide down dropdowns */
+
+#fixed-nav {
+  .dropdown-menu,
+  .dropdown.open .dropdown-menu {
+    @include fadeInDown(
+      $count: $countDefault, 
+      $duration: 0.25s, 
+      $delay: $delayDefault, 
+      $function: bounce, 
+      $fill: $fillDefault, 
+      $visibility: $visibilityDefault
+    );
+  }
+}
+
+/*
+ * Custom Sass
+ */
+
+@import "custom";

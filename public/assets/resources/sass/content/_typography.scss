@@ -1,0 +1,196 @@
+
+/*
+ * Typography, links, text and header related styles
+ */
+
+/* Typography fonts */
+
+/* Default, should be set in template */
+
+body {
+
+  h1, h2, h3, h4, h5, h6 {
+  }
+}
+
+/* Links, text and headers */
+
+a {
+  transition: all 0.3s ease 0s;
+}
+
+a.link {
+  color: $link-color-dark;
+  text-decoration: underline;
+  /*
+  background-color: transparentize($link-color-dark, 0.8);*/
+}
+
+a.link:hover,
+a.link:active,
+a.link:focus {
+  color: lighten($link-color-dark, 20);
+  /*
+  background-color: transparent;*/
+  text-decoration: none;
+}
+
+.text-light {
+  color: $light-color;
+
+  .text-secondary {
+    color: darken($light-color, 30);
+  }
+
+  a.link {
+    color: $link-color-light;
+  }
+
+  a.link:hover,
+  a.link:active,
+  a.link:focus {
+    color: darken($link-color-light, 20);
+  }
+
+  hr {
+    border-top: 1px solid rgba(255,255,255,.2);
+  }
+}
+
+.text-dark {
+  color: $dark-color;
+
+  .text-secondary {
+    color: lighten($dark-color, 30);
+  }
+}
+
+h3 {
+  margin: 2rem 0 1rem;
+}
+
+.col-12.col-lg-9 h2 {
+  margin-top: 1.5rem;
+}
+
+h1, h2, h3, h4, h5 {
+  .tag {
+    position: relative;
+    top: -3px;
+  }
+}
+
+@include media-breakpoint-up(xs) {
+  .display-1 {
+    font-size: $display4-size;
+  }
+  .display-2 {
+    font-size: $display4-size;
+  }
+  .display-3 {
+    font-size: $display4-size;
+  }
+  .display-4 {
+    font-size: $display4-size;
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  .display-1 {
+    font-size: $display4-size;
+  }
+  .display-2 {
+    font-size: $display4-size;
+  }
+  .display-3 {
+    font-size: $display4-size;
+  }
+  .display-4 {
+    font-size: $display4-size;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .display-1 {
+    font-size: $display2-size;
+  }
+  .display-2 {
+    font-size: $display3-size;
+  }
+  .display-3 {
+    font-size: $display4-size;
+  }
+  .display-4 {
+    font-size: $display4-size;
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  .display-1 {
+    font-size: $display1-size;
+  }
+  .display-2 {
+    font-size: $display2-size;
+  }
+  .display-3 {
+    font-size: $display3-size;
+  }
+  .display-4 {
+    font-size: $display4-size;
+  }
+}
+
+.text-xs {
+  &,i {
+    font-size: 0.5rem !important;
+  }
+}
+
+.text-s {
+  &,i {
+    font-size: 1rem !important;
+  }
+}
+
+.text-m {
+  &,i {
+    font-size: 1.5rem !important;
+  }
+}
+
+.text-l {
+  &,i {
+    font-size: 2rem !important;
+  }
+}
+
+.text-xl {
+  &,i {
+    font-size: 2.5rem !important;
+  }
+}
+
+.text-xxl {
+  &,i {
+    font-size: 2.6rem !important;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .text-xxl {
+    &,i {
+      font-size: 2rem !important;
+    }
+  }
+}
+
+.text-xs,
+.text-s,
+.text-m,
+.text-l,
+.text-xl,
+.text-xxl {
+  i {
+    vertical-align: text-bottom;
+  }
+}

@@ -1,0 +1,356 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+$sub-nav-height: 59px !default;
+$sub-nav-bg: #146eff !default;
+
+/* Add material color classes to default Bootstrap classes */
+@each $color, $value in $color-list {
+  @include text-emphasis-variant(".text-#{$color}", $value);
+}
+
+@each $color, $value in $color-list {
+  @include bg-variant(".bg-#{$color}", $value);
+}
+
+@each $color, $value in $color-list {
+  .border-#{$color} {
+    border-color: $value !important;
+  }
+}
+
+// Dropdown hover
+#fixed-nav {
+  .dropdown:hover>.dropdown-menu,
+  /*.dropdown.show>.dropdown-menu*/ {
+    display: block;
+  }
+}
+
+.nav-item:hover>a {
+  background-color: #e6e6e6 !important;
+}
+
+// Small icons for small buttons
+.btn-sm {
+  i.mi {
+    font-size: 14px;
+  }
+}
+
+.alert p:last-child {
+  margin-bottom: 0 !important;
+}
+
+body.fixed-nav {
+  margin-top: 72px;
+}
+
+body.fixed-nav.top-message {
+  margin-top: 110px !important;
+}
+
+body.sub-nav.fixed-nav {
+  margin-top: 72px + $sub-nav-height !important;
+}
+
+body.sub-nav.fixed-nav.top-message {
+  margin-top: 110px + $sub-nav-height !important;
+}
+
+body.top-message { 
+  #fixed-nav {
+    top: 38px !important;
+  }
+}
+/*
+.btn-fab {
+  border-radius: 50% !important;
+}
+.btn-fab:hover,
+.show .btn-fab {
+  background-color: #1d8ccc;
+  color: #fff !important;
+}
+.btn-fab:hover i,
+.show .btn-fab i {
+  color: #fff !important;
+}
+*/
+/* Bootstrap popover + tooltips square */
+.bs-popover-auto[x-placement^=top] .arrow, .bs-popover-top .arrow {
+  bottom: calc((.5rem + 0px) * -1);
+}
+
+@each $color, $value in $color-list {
+  .badge-#{$color}-hover:hover .badge {
+    background-color: #fff;
+    color: $value !important;
+  }
+}
+
+.popover,
+.tooltip-inner {
+  border-radius: 0;
+}
+
+#top-message {
+  position: fixed;
+  top:0;
+  height: 38px;
+  z-index: 99999;
+  width: 100%;
+  padding: 6px 10px;
+  font-weight: bold;
+  text-align: center;
+  background-color: #ffe500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  a {
+    text-decoration: underline;
+  }
+}
+
+.compare {
+  td,
+  .column {
+    text-align: center;
+  }
+
+  .feature {
+    text-align: right;
+  }
+}
+
+.popover-help {
+  color: #818a91;
+}
+
+.navbar.bg-transparent {
+  a {
+    color: #fff !important;
+  }
+
+  .navbar-nav > li:hover > a:before {
+    background: #fff;
+  }
+/*
+  @include media-breakpoint-down(sm) {
+    .navbar-nav {
+      background-color: rgba(66,165,245,0.90);
+    }
+  }
+  */
+}
+
+.no-events {
+  pointer-events: none;
+}
+
+.all-events {
+  pointer-events: all;
+}
+
+.navbar-shadow-light {
+  box-shadow: 0 2px 24px 2px rgba(0, 0, 0, 0.01), 0 4px 30px 5px rgba(0, 0, 0, 0.02), 0 6px 10px -5px rgba(0, 0, 0, 0.015);
+}
+
+.navbar-shadow {
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.02), 0 6px 30px 5px rgba(0, 0, 0, 0.07), 0 8px 10px -5px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease-in-out;
+/*  box-shadow: $mdl-shadow--4dp;*/
+}
+
+
+@include media-breakpoint-down(md) {
+  .navbar-opened {
+    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.02), 0 6px 30px 5px rgba(0, 0, 0, 0.07), 0 8px 10px -5px rgba(0, 0, 0, 0.05);
+    .container {
+      padding-bottom: 1.2rem;
+    }
+    .nav-link {
+      font-size: 1.1rem;
+      font-weight: 600;
+      line-height: 3.5rem !important;
+    }
+    .nav-item {
+      margin: 0;
+      &.active,
+      &.active:hover {
+        a.nav-link {
+          background-color: transparent;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+/* docs and manual margins */
+.breadcrumbs {
+  margin-bottom: 2rem;
+}
+.card-block {
+  margin-bottom: 2rem;
+}
+.col-lg-3.pull-lg-9 .list-group {
+  margin-bottom: 1rem;
+}
+
+#fixed-nav {
+  top: 0;
+  z-index:99;
+  width: 100%;
+  position: fixed;
+
+  .navbar {
+    -webkit-transition: all 0.15s ease-in-out;
+    -moz-transition: all 0.15s ease-in-out;
+    -o-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+  }
+
+  .navbar-dark {
+    padding: 0;
+  }
+
+  .navbar-brand {
+    float: left;
+  }
+
+  @include media-breakpoint-down(md) {
+    .navbar-brand {
+      margin-left:15px;
+    }
+  }
+
+  .navbar-nav {
+    li.nav-item {
+      margin-left: 0.6rem;
+      .nav-link {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+      .nav-icon {
+        height: 24px;
+        margin-right: 2px;
+        position: relative;
+        top:-2px;
+      }
+    }
+    li.nav-item:first-child {
+      margin-left: 0rem;
+    }
+  }
+
+  .collapsing,
+  .collapse.show {
+    .navbar-nav {
+      li.nav-item {
+        margin-left: 0rem;
+        .nav-link {
+          width: 100%;
+        }
+      }
+      li.nav-item:first-child {
+        margin-left: 0rem;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(xs) {
+  #fixed-nav .navbar .container {
+    width: 100%;
+  }
+}
+
+
+@include media-breakpoint-down(md) {
+  // Toggle icon
+  .collapsed.navbar-toggler .navbar-toggler-icon::before {
+    content: '\e5d2';
+  }
+
+  .navbar-toggler .navbar-toggler-icon {
+    background-image: none;
+    top:0;
+  }
+  .navbar-toggler .navbar-toggler-icon::before {
+    content: '\e5cd';
+    font-size: 1.8rem;
+  }
+}
+
+#navbar-sub {
+
+  background-color: $sub-nav-bg;
+
+  @include media-breakpoint-up(lg) {
+    .navbar-nav {
+      height: $sub-nav-height !important;
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    .row {
+      width: 100%;
+      margin: 0 !important;
+      .navbar-nav {
+        padding: 0 0 10px 0;
+      }
+    }
+  }
+
+  .navbar .navbar-toggler {
+    line-height: $sub-nav-height;
+  }
+
+  .dropdown-menu {
+    box-shadow: $mdl-shadow--4dp;
+  }
+
+  .navbar-nav>li.nav-item>a.nav-link {
+    line-height: $sub-nav-height !important;
+  }
+
+  .nav-item.active>a {
+    background-color: darken($sub-nav-bg, 10);
+  }
+
+  .navbar-nav>li.nav-item:hover>a,
+  .navbar-nav>li.nav-item:active>a,
+  .navbar-nav>li.nav-item:focus>a{
+    background-color: darken($sub-nav-bg, 10) !important;
+  }
+
+  .dropdown-item.active {
+    background-color: darken($sub-nav-bg, 10);
+  }
+}
+
+.img-thumbnail,
+a[data-toggle="lightbox"] img {
+  margin-bottom: 20px;
+}
+
+abbr[title] {
+  text-decoration: none;
+}
+
+.btn-list {
+  .btn-block {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+  }
+}

@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<title>Nearby Platform readme</title>
+<style type="text/css">
+  code {
+    font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    color: #e83e8c;
+  }
+  code.language-bash {
+    display: block;
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+  }
+  
+</style>
+</head>
+<body>
+<div class="container my-5">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="mb-5">Nearby Platform</h1>
+      <ul>
+        <li><a href="#Requirements">Requirements</a></li>
+        <li><a href="#Installation">Installation</a>
+          <ul>
+          <li><a href="#Prerequisites">Prerequisites</a>
+            <ul>
+              <li><a href="#Upload">Upload</a></li>
+            </ul>
+            <li><a href="#Automatic">Automatic installation</a></li>
+            <li><a href="#Manual">Manual installation</a>
+              <ul>
+                <li><a href="#Generate">Generate and seed database</a></li>
+                <li><a href="#Queues">Queues</a>
+                  <ul>
+                    <li><a href="#Supervisor">Installing Supervisor</a></li>
+                    <li><a href="#Configuring_Supervisor">Configuring Supervisor</a></li>
+                    <li><a href="#Starting_Supervisor">Starting Supervisor</a></li>
+                    <li><a href="#Troubleshooting_Supervisor">Troubleshooting</a></li>
+                  </ul>
+                </li>
+                <li><a href="#First_login">First login</a></li>
+              </ul>
+            </li>
+          </li>
+          </ul>
+        </li>
+      </ul>
+      <h2 class="mt-5 mb-3" id="Requirements">Requirements</h2>
+      <p>The script requires the MySQL version and PHP version and extensions as described below.</p>
+      <ul>
+        <li>MySQL &gt;= 5.7.8</li>
+        <li>PHP 7.2.x or higher
+          <ul>
+            <li>OpenSSL PHP Extension</li>
+            <li>PDO PHP Extension</li>
+            <li>Mbstring PHP Extension</li>
+            <li>Tokenizer PHP Extension</li>
+            <li>XML PHP Extension</li>
+            <li>Ctype PHP Extension</li>
+            <li>JSON PHP Extension</li>
+            <li>GD PHP Extension</li>
+            <li>ZipArchive PHP Extension</li>
+          </ul>
+        </li>
+      </ul>
+      <h2 class="mt-5 mb-3" id="Installation">Installation</h2>
+      <p>We recommend <a class="link" href="https://m.do.co/c/481d60856a31" target="_blank">DigitalOcean</a> for hosting and <a class="link" href="https://www.serverpilot.io/?refcode=4f2ccbd3eae6" target="_blank">ServerPilot</a> for automated security and SSL. This is not required, the script will work on any PHP / Apache / MySQL VPS or server that meets the conditions described above.</p>
+      <blockquote class="alert alert-info rounded-0">
+        <p class="m-0">The script has to be installed on the root of a domain or subdomain. It does not work in a subdirectory. <code>example.com</code> works, <code>loyalty.example.com</code> works, <code>example.com/loyalty</code> will <strong>not</strong> work.</p>
+      </blockquote>
+      <h3 class="mt-5 mb-3" id="Prerequisites">Prerequisites</h3>
+      <p>For installation the services below are advised, but not required.</p>
+      <ul>
+        <li> <a class="link" href="https://m.do.co/c/481d60856a31" target="_blank">digitalocean.com</a> </li>
+        <li> <a class="link" href="https://www.serverpilot.io/?refcode=4f2ccbd3eae6" target="_blank">serverpilot.io</a> </li>
+        <li> <a class="link" href="https://www.mailgun.com/" target="_blank">mailgun.com</a> </li>
+        <li> <a class="link" href="https://pusher.com/" target="_blank">pusher.com</a> (required, free account) </li>
+      </ul>
+      <h4 class="mt-5 mb-3" id="Upload">Upload files</h4>
+      <p>Extract and upload all files found in the <code>nearby-platform-x.x.x</code> directory of this Zip file to the web root of your hosting account.</p>
+      <h3 class="mt-5 mb-3" id="Automatic">Automatic installation</h3>
+      <p>When all files are uploaded, open the url where the script is installed. The install page will open where you can enter the required settings.</p>
+      <p>If you want to re-install the script, remove the <code>.env</code> file in the root, and drop all tables of the database.</p>
+      <h3 class="mt-5 mb-3" id="Manual">Manual installation</h3>
+      <p>If you don't want to run the automatic installation, you can copy and edit the config file directly.</p>
+      <p>In the root directory, there is an example config file <code>.env.example</code>. Copy this file to <code>.env</code> and open it to edit:</p>
+      <pre class="prettyprint"><code class="language-bash">$ cp .env.example .env
+$ sudo nano .env</code></pre>
+      <p>In the config file you can enter the database credentials set up earlier. Set up a domain in your <a class="link" href="https://www.mailgun.com/">mailgun.com</a> account and enter the details at the mail settings. Also, make sure you enter the correct <code>APP_URL</code>.</p>
+      <p>Get your <a class="link" href="https://developers.google.com/maps/documentation/javascript/get-api-key">Google Maps key</a>, and enter it at the <code>GMAPS_KEY</code> parameter. It should look something like this:</p>
+      <pre class="prettyprint"><code class="language-bash">GMAPS_KEY=&quot;AIzuSyTkg4y-D0LT5gvUWFCgmCoSiMJq-Tf1JwM&quot;</code></pre>
+      <h4 class="mt-5 mb-3" id="Generate">Generate and seed database</h4>
+      <p>Once the config file database settings are configured, you can create the tables and default records with the following commands:</p>
+      <pre class="prettyprint"><code class="language-bash">$ php artisan migrate
+$ php artisan db:seed</code></pre>
+      <p>If you use ServerPilot, you have to use a different command for <code>php</code>, <a class="link" href="https://serverpilot.io/docs/how-to-use-the-php-cli">depending on the version you are using</a>. In case you for example use PHP 7.3:</p>
+      <pre class="prettyprint"><code class="language-bash">$ php7.3-sp artisan migrate
+$ php7.3-sp artisan db:seed</code></pre>
+      <p>The database will be generated and you can login with <code>info@example.com</code> and the password <code>welcome</code>.</p>
+      <h4 class="mt-5 mb-3" id="Queues">Queues</h4>
+      <blockquote class="alert alert-info rounded-0">
+        <p class="m-0">This is not mandatory, but is recommended for a better perfomance. For example, the PDF of a deal is generated in the background to avoid waiting time.</p>
+      </blockquote>
+      <p>When a mail is sent, or a PDF is generated by the system, this is done with a queue so there is no delay for the user and slow tasks aren't interrupted when a user visits another page.</p>
+      <p>If you choose to use supervisor, set <code>QUEUE_CONNECTION=database</code> in the <code>.env</code> config file.</p>
+      <h5 class="mt-5 mb-3" id="Supervisor">Installing Supervisor</h5>
+      <p>Supervisor is a process monitor for the Linux operating system, and will automatically restart your <code>queue:work</code> process if it fails. To install Supervisor on Ubuntu, you may use the following command:</p>
+      <pre class="prettyprint"><code class="language-bash">$ sudo apt-get install supervisor
+        </code></pre>
+      <h5 class="mt-5 mb-3" id="Configuring_Supervisor">Configuring Supervisor</h5>
+      <p>Supervisor configuration files are typically stored in the <code>/etc/supervisor/conf.d</code> directory. Within this directory, you may create any number of configuration files that instruct supervisor how your processes should be monitored. For example, let's create a <code>name_of_your_app.conf</code> file that starts and monitors a <code>queue:work</code> process:</p>
+      <pre class="prettyprint"><code class="language-bash">[program:name_of_your_app]
+process_name=%(program_name)s_%(process_num)02d
+command=php /srv/users/serverpilot/apps/name_of_your_app/public/artisan queue:work database --sleep=3 --tries=3
+autostart=true
+autorestart=true
+user=serverpilot
+numprocs=8
+redirect_stderr=true
+stdout_logfile=/srv/users/serverpilot/apps/name_of_your_app/supervisor.log</code></pre>
+      <p>In this example, the <code>numprocs</code> directive will instruct Supervisor to run 8 <code>queue:work</code> processes and monitor all of them, automatically restarting them if they fail. Of course, you should change the <code>queue:work sqs</code> portion of the <code>command</code> directive to reflect your desired queue connection.</p>
+      <h5 class="mt-5 mb-3" id="Starting_Supervisor">Starting Supervisor</h5>
+      <p>Once the configuration file has been created, you may update the Supervisor configuration and start the processes using the following commands:</p>
+      <pre class="prettyprint"><code class="language-bash">$ sudo supervisorctl reread
+$ sudo supervisorctl update
+$ sudo supervisorctl start name_of_your_app:*</code></pre>
+      <p>For more information on Supervisor, consult the <a class="link" href="http://supervisord.org/index.html">Supervisor documentation</a>.</p>
+      <h5 class="mt-5 mb-3" id="Troubleshooting_Supervisor">Troubleshooting</h5>
+      <p>If queues are not triggered, restart the service with this command:</p>
+      <pre class="prettyprint"><code class="language-bash">$ service supervisor restart</code></pre>
+      <h4 class="mt-5 mb-3" id="First_login">First login</h4>
+      <p>When the script is installed, you can login with the following credentials:</p>
+      <p><strong>E-mail:</strong> info@example.com</p>
+      <p><strong>Password:</strong> welcome</p>
+    </div>
+  </div>
+</div>
+
+<!-- Optional JavaScript --> 
+<!-- jQuery first, then Popper.js, then Bootstrap JS --> 
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script> 
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>

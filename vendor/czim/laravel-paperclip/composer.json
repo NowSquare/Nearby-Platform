@@ -1,0 +1,38 @@
+{
+    "name": "czim/laravel-paperclip",
+    "description": "Laravel Eloquent file attachment solution",
+    "keywords": [ "file", "attachment", "laravel", "upload" ],
+    "homepage": "https://github.com/czim",
+    "require": {
+        "php": ">=7.0.0",
+        "czim/file-handling": "^1.0"
+    },
+    "require-dev": {
+        "mockery/mockery": "0.9.*|~1.0",
+        "phpunit/phpunit": "~6.0|~7.0",
+        "orchestra/testbench": "~3.5|~3.6",
+        "satooshi/php-coveralls": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Czim\\Paperclip\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Czim\\Paperclip\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Czim\\Paperclip\\Providers\\PaperclipServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

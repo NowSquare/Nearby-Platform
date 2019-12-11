@@ -1,0 +1,118 @@
+
+/*
+ * Classes to color texts and backgrounds
+ */
+
+.bg-light {
+  background: $light-color;
+}
+
+.color-light {
+  &,i {
+    color: $light-color;
+  }
+}
+
+a.color-light:hover,
+a.color-light:active,
+a.color-light:focus {
+  &,i {
+    color: darken($light-color, 10);
+  }
+}
+
+.color-light-10 {
+  &,i {
+    color: darken($light-color, 10);
+  }
+}
+a.color-light-10:hover,
+a.color-light-10:active,
+a.color-light-10:focus {
+  &,i {
+    color: $light-color;
+  }
+}
+
+.color-light-20 {
+  &,i {
+    color: darken($light-color, 20);
+  }
+}
+a.color-light-20:hover,
+a.color-light-20:active,
+a.color-light-20:focus {
+  &,i {
+    color: darken($light-color, 10);
+  }
+}
+
+.bg-dark {
+  background: $dark-color;
+}
+
+.color-dark {
+  &,i {
+    color: $dark-color;
+  }
+}
+
+a.color-dark:hover,
+a.color-dark:active,
+a.color-dark:focus {
+  &,i {
+    color: lighten($dark-color, 10);
+  }
+}
+
+.color-dark-10 {
+  &,i {
+    color: lighten($dark-color, 10);
+  }
+}
+a.color-dark-10:hover,
+a.color-dark-10:active,
+a.color-dark-10:focus {
+  &,i {
+    color: $dark-color;
+  }
+}
+
+.color-dark-20 {
+  &,i {
+    color: lighten($dark-color, 20);
+  }
+}
+a.color-dark-20:hover,
+a.color-dark-20:active,
+a.color-dark-20:focus {
+  &,i {
+    color: lighten($dark-color, 10);
+  }
+}
+
+/* Material colors */
+
+@each $color in $color-list {
+
+  $color-name: nth($color, 1);
+  $color-value: nth($color, 2);
+
+  .bg-#{$color-name} {
+    background: $color-value;
+  }
+
+  .color-#{$color-name} {
+    &,i {
+      color: $color-value;
+    }
+  }
+
+  a.color-#{$color-name}:hover,
+  a.color-#{$color-name}:active,
+  a.color-#{$color-name}:focus {
+    &,i {
+      color: darken($color-value, 10);
+    }
+  }
+}

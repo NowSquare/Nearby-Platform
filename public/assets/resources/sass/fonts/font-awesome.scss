@@ -1,0 +1,12 @@
+/*!
+ * Font Awesome (http://fontawesome.io/)
+ */
+
+$enable-flex: false;
+
+$fa-font-path: "../fonts/font-awesome" !default;
+$fa-css-prefix: fa !default;
+
+@import "../../../bower_components/font-awesome/web-fonts-with-css/scss/fontawesome";
+//@import "../../../bower_components/font-awesome/web-fonts-with-css/scss/v4-shims";
+@import "../../../bower_components/font-awesome/web-fonts-with-css/scss/regular";
