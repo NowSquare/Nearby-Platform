@@ -276,7 +276,7 @@
 		"name": "બહામિયન ડોલર"
 	},
 	"BDT": {
-		"name": "બાંગલાદેશી ટાકા"
+		"name": "બાંગ્લાદેશી ટાકા"
 	},
 	"BBD": {
 		"name": "બાર્બાડિયન ડોલર"
@@ -418,7 +418,7 @@
 		"name": "વિયેતનામીસ ડોંગ",
 		"symbol": "₫"
 	},
-	"VEF": {
+	"VES": {
 		"name": "વેનેઝુએલન બોલિવર"
 	},
 	"LKR": {
@@ -487,6 +487,9 @@
 	},
 	"SVC": {
 		"name": "Salvadoran Colón"
+	},
+	"UYW": {
+		"name": "Uruguayan Nominal Wage Index Unit"
 	},
 	"ZWL": {
 		"name": "Zimbabwean Dollar (2009)"

@@ -1,28 +1,28 @@
 {
 	"AFN": {
-		"name": "Afegani do Afeganistão"
+		"name": "afegâni afegão"
 	},
 	"MGA": {
-		"name": "Ariari de Madagáscar"
+		"name": "ariari malgaxe"
 	},
 	"THB": {
-		"name": "Baht da Tailândia",
+		"name": "baht tailandês",
 		"symbol": "฿"
 	},
 	"PAB": {
 		"name": "balboa do Panamá"
 	},
 	"ETB": {
-		"name": "Birr etíope"
+		"name": "birr etíope"
 	},
-	"VEF": {
+	"VES": {
 		"name": "bolívar"
 	},
 	"BOB": {
 		"name": "boliviano"
 	},
 	"GHS": {
-		"name": "Cedi de Gana"
+		"name": "cedi ganês"
 	},
 	"SVC": {
 		"name": "Colom salvadorenho"
@@ -49,22 +49,22 @@
 		"name": "coroa sueca"
 	},
 	"GMD": {
-		"name": "Dalasi da Gâmbia"
+		"name": "dalasi gambiano"
 	},
 	"DZD": {
 		"name": "dinar argelino"
 	},
 	"BHD": {
-		"name": "Dinar baremita"
+		"name": "dinar baremita"
 	},
 	"IQD": {
-		"name": "Dinar iraquiano"
+		"name": "dinar iraquiano"
 	},
 	"JOD": {
-		"name": "Dinar jordaniano"
+		"name": "dinar jordaniano"
 	},
 	"KWD": {
-		"name": "Dinar kuwaitiano"
+		"name": "dinar kuwaitiano"
 	},
 	"LYD": {
 		"name": "dinar líbio"
@@ -79,13 +79,16 @@
 		"name": "dinar tunisino"
 	},
 	"AED": {
-		"name": "Dirham dos Emirados Árabes Unidos"
+		"name": "dirham dos Emirados Árabes Unidos"
 	},
 	"MAD": {
 		"name": "dirham marroquino"
 	},
+	"STN": {
+		"name": "dobra de São Tomé e Príncipe"
+	},
 	"AUD": {
-		"name": "Dólar australiano",
+		"name": "dólar australiano",
 		"symbol": "AU$"
 	},
 	"BBD": {
@@ -98,7 +101,7 @@
 		"name": "dólar bermudense"
 	},
 	"BND": {
-		"name": "Dólar bruneíno"
+		"name": "dólar bruneano"
 	},
 	"CAD": {
 		"name": "dólar canadiano",
@@ -107,34 +110,25 @@
 	"GYD": {
 		"name": "dólar da Guiana"
 	},
-	"NAD": {
-		"name": "Dólar da Namíbia"
-	},
 	"BSD": {
 		"name": "dólar das Bahamas"
 	},
 	"XCD": {
-		"name": "Dólar das Caraíbas Orientais",
+		"name": "dólar das Caraíbas Orientais",
 		"symbol": "EC$"
 	},
 	"KYD": {
-		"name": "Dólar das Ilhas Caimão"
+		"name": "dólar das Ilhas Caimão"
 	},
 	"SBD": {
-		"name": "Dólar das Ilhas Salomão"
-	},
-	"FJD": {
-		"name": "Dólar de Fiji"
+		"name": "dólar das Ilhas Salomão"
 	},
 	"HKD": {
-		"name": "Dólar de Hong Kong",
+		"name": "dólar de Hong Kong",
 		"symbol": "HK$"
 	},
-	"SGD": {
-		"name": "Dólar de Singapura"
-	},
 	"TTD": {
-		"name": "Dólar de Trindade e Tobago"
+		"name": "dólar de Trindade e Tobago"
 	},
 	"SRD": {
 		"name": "dólar do Suriname"
@@ -146,22 +140,31 @@
 		"name": "dólar dos Estados Unidos",
 		"symbol": "US$"
 	},
+	"FJD": {
+		"name": "dólar fijiano"
+	},
 	"JMD": {
-		"name": "Dólar jamaicano"
+		"name": "dólar jamaicano"
 	},
 	"LRD": {
-		"name": "Dólar liberiano"
+		"name": "dólar liberiano"
+	},
+	"NAD": {
+		"name": "dólar namibiano"
 	},
 	"NZD": {
-		"name": "Dólar neozelandês",
+		"name": "dólar neozelandês",
 		"symbol": "NZ$"
 	},
+	"SGD": {
+		"name": "dólar singapuriano"
+	},
 	"VND": {
-		"name": "Dong vietnamita",
+		"name": "dong vietnamita",
 		"symbol": "₫"
 	},
 	"AMD": {
-		"name": "Dram arménio"
+		"name": "dram arménio"
 	},
 	"CVE": {
 		"name": "escudo cabo-verdiano"
@@ -171,7 +174,7 @@
 		"symbol": "€"
 	},
 	"ANG": {
-		"name": "Florim das Antilhas Holandesas"
+		"name": "florim das Antilhas Holandesas"
 	},
 	"AWG": {
 		"name": "florim de Aruba"
@@ -180,40 +183,40 @@
 		"name": "forint húngaro"
 	},
 	"BIF": {
-		"name": "Franco burundiano"
+		"name": "franco burundiano"
 	},
 	"XOF": {
 		"name": "franco CFA (BCEAO)",
 		"symbol": "CFA"
 	},
 	"XAF": {
-		"name": "Franco CFA (BEAC)",
+		"name": "franco CFA (BEAC)",
 		"symbol": "FCFA"
 	},
 	"XPF": {
-		"name": "Franco CFP",
+		"name": "franco CFP",
 		"symbol": "CFPF"
 	},
 	"KMF": {
-		"name": "Franco comoriano"
+		"name": "franco comoriano"
 	},
 	"CDF": {
-		"name": "Franco congolês"
+		"name": "franco congolês"
 	},
 	"GNF": {
-		"name": "Franco guineense"
+		"name": "franco guineense"
 	},
 	"DJF": {
-		"name": "Franco jibutiano"
+		"name": "franco jibutiano"
 	},
 	"RWF": {
-		"name": "Franco ruandês"
+		"name": "franco ruandês"
 	},
 	"CHF": {
 		"name": "franco suíço"
 	},
 	"HTG": {
-		"name": "Gourde haitiano"
+		"name": "gourde haitiano"
 	},
 	"PYG": {
 		"name": "guarani paraguaio"
@@ -222,32 +225,32 @@
 		"name": "hryvnia ucraniano"
 	},
 	"JPY": {
-		"name": "Iene japonês",
+		"name": "iene japonês",
 		"symbol": "JP¥"
 	},
 	"PGK": {
-		"name": "Kina da Papua-Nova Guiné"
+		"name": "kina papuásia"
 	},
 	"LAK": {
-		"name": "Kip de Laos"
+		"name": "kip laosiano"
 	},
 	"HRK": {
 		"name": "kuna croata"
 	},
 	"MWK": {
-		"name": "Kwacha do Malawi"
+		"name": "kwacha malauiano"
 	},
 	"ZMW": {
-		"name": "Kwacha zambiano"
+		"name": "kwacha zambiano"
 	},
 	"AOA": {
-		"name": "Kwanza angolano"
+		"name": "kwanza angolano"
 	},
 	"MMK": {
-		"name": "Kyat de Mianmar"
+		"name": "kyat de Mianmar"
 	},
 	"GEL": {
-		"name": "Lari georgiano"
+		"name": "lari georgiano"
 	},
 	"ALL": {
 		"name": "lek albanês"
@@ -256,7 +259,7 @@
 		"name": "lempira das Honduras"
 	},
 	"SLL": {
-		"name": "Leone de Serra Leoa"
+		"name": "leone de Serra Leoa"
 	},
 	"MDL": {
 		"name": "leu moldavo"
@@ -273,9 +276,6 @@
 	"GIP": {
 		"name": "libra de Gibraltar"
 	},
-	"SHP": {
-		"name": "Libra de Santa Helena"
-	},
 	"EGP": {
 		"name": "libra egípcia"
 	},
@@ -284,59 +284,62 @@
 		"symbol": "£"
 	},
 	"LBP": {
-		"name": "Libra libanesa"
+		"name": "libra libanesa"
+	},
+	"SHP": {
+		"name": "libra santa-helenense"
 	},
 	"SYP": {
-		"name": "Libra síria"
+		"name": "libra síria"
 	},
 	"SDG": {
 		"name": "libra sudanesa"
 	},
 	"SSP": {
-		"name": "Libra sul-sudanesa"
+		"name": "libra sul-sudanesa"
 	},
 	"SZL": {
-		"name": "Lilangeni da Suazilândia"
+		"name": "lilangeni suázi"
 	},
 	"TRY": {
-		"name": "Lira turca"
+		"name": "lira turca"
 	},
 	"LSL": {
 		"name": "Loti do Lesoto"
 	},
 	"AZN": {
-		"name": "Manat do Azerbaijão"
+		"name": "manat azeri"
 	},
 	"TMT": {
-		"name": "Manat do Turquemenistão"
+		"name": "manat turcomeno"
 	},
 	"BAM": {
 		"name": "marco bósnio-herzegóvino conversível"
 	},
 	"MZN": {
-		"name": "Metical de Moçambique"
+		"name": "metical moçambicano"
 	},
 	"NGN": {
-		"name": "Naira nigeriana"
+		"name": "naira nigeriana"
 	},
 	"ERN": {
-		"name": "Nakfa da Eritreia"
+		"name": "nakfa eritreia"
 	},
 	"BTN": {
-		"name": "Ngultrum do Butão"
+		"name": "ngultrum butanês"
 	},
 	"TWD": {
-		"name": "Novo dólar taiwanês",
+		"name": "novo dólar taiwanês",
 		"symbol": "NT$"
 	},
 	"MRU": {
-		"name": "Ouguiya da Mauritânia"
+		"name": "ouguiya mauritana"
 	},
 	"TOP": {
-		"name": "Paʻanga de Tonga"
+		"name": "paʻanga tonganesa"
 	},
 	"MOP": {
-		"name": "Pataca de Macau"
+		"name": "pataca macaense"
 	},
 	"ARS": {
 		"name": "peso argentino"
@@ -354,10 +357,10 @@
 		"name": "peso cubano conversível"
 	},
 	"DOP": {
-		"name": "Peso dominicano"
+		"name": "peso dominicano"
 	},
 	"PHP": {
-		"name": "Peso filipino"
+		"name": "peso filipino"
 	},
 	"MXN": {
 		"name": "peso mexicano",
@@ -367,38 +370,38 @@
 		"name": "peso uruguaio"
 	},
 	"BWP": {
-		"name": "Pula de Botswana"
+		"name": "pula de Botswana"
 	},
 	"GTQ": {
 		"name": "quetzal da Guatemala"
 	},
 	"ZAR": {
-		"name": "Rand sul-africano"
+		"name": "rand sul-africano"
 	},
 	"BRL": {
 		"name": "real brasileiro",
 		"symbol": "R$"
 	},
-	"OMR": {
-		"name": "Rial de Omã"
-	},
 	"QAR": {
-		"name": "Rial do Catar"
+		"name": "rial catarense"
 	},
 	"YER": {
-		"name": "Rial iemenita"
+		"name": "rial iemenita"
 	},
 	"IRR": {
-		"name": "Rial iraniano"
+		"name": "rial iraniano"
+	},
+	"OMR": {
+		"name": "rial omanense"
 	},
 	"SAR": {
-		"name": "Rial saudita"
+		"name": "rial saudita"
 	},
 	"KHR": {
-		"name": "Riel cambojano"
+		"name": "riel cambojano"
 	},
 	"MYR": {
-		"name": "Ringgit malaio"
+		"name": "ringgit malaio"
 	},
 	"BYN": {
 		"name": "rublo bielorrusso"
@@ -406,83 +409,83 @@
 	"RUB": {
 		"name": "rublo russo"
 	},
-	"MVR": {
-		"name": "Rupia das Ilhas Maldivas"
-	},
 	"LKR": {
-		"name": "Rupia do Sri Lanka"
+		"name": "rupia do Sri Lanka"
 	},
 	"INR": {
-		"name": "Rupia indiana",
+		"name": "rupia indiana",
 		"symbol": "₹"
 	},
 	"IDR": {
-		"name": "Rupia indonésia"
+		"name": "rupia indonésia"
+	},
+	"MVR": {
+		"name": "rupia maldivana"
 	},
 	"MUR": {
-		"name": "Rupia mauriciana"
+		"name": "rupia mauriciana"
 	},
 	"NPR": {
-		"name": "Rupia nepalesa"
+		"name": "rupia nepalesa"
 	},
 	"PKR": {
-		"name": "Rupia paquistanesa"
+		"name": "rupia paquistanesa"
 	},
 	"SCR": {
-		"name": "Rupia seichelense"
-	},
-	"STN": {
-		"name": "São Tomé & Príncipe Dobra (2018)"
+		"name": "rupia seichelense"
 	},
 	"ILS": {
-		"name": "Sheqel novo israelita",
+		"name": "sheqel novo israelita",
 		"symbol": "₪"
 	},
 	"PEN": {
 		"name": "sol peruano"
 	},
 	"KGS": {
-		"name": "Som do Quirguistão"
+		"name": "som quirguiz"
 	},
 	"UZS": {
-		"name": "Som do Uzbequistão"
+		"name": "som uzbeque"
 	},
 	"TJS": {
-		"name": "Somoni do Tajaquistão"
+		"name": "somoni tajique"
 	},
 	"BDT": {
-		"name": "Taka de Bangladesh"
+		"name": "taka bengali"
 	},
 	"WST": {
-		"name": "Tala samoano"
+		"name": "tala samoano"
 	},
 	"KZT": {
-		"name": "Tenge do Cazaquistão"
+		"name": "tenge cazaque"
 	},
 	"MNT": {
-		"name": "Tugrik da Mongólia"
+		"name": "tugrik mongol"
+	},
+	"UYW": {
+		"name": "Uruguayan Nominal Wage Index Unit"
 	},
 	"VUV": {
-		"name": "Vatu de Vanuatu"
+		"name": "vatu de Vanuatu"
 	},
 	"KPW": {
-		"name": "Won norte-coreano"
+		"name": "won norte-coreano"
 	},
 	"KRW": {
-		"name": "Won sul-coreano",
+		"name": "won sul-coreano",
 		"symbol": "₩"
 	},
 	"KES": {
-		"name": "Xelim queniano"
+		"name": "xelim queniano"
 	},
 	"SOS": {
-		"name": "Xelim somali"
+		"name": "xelim somali"
 	},
 	"TZS": {
-		"name": "Xelim tanzaniano"
+		"name": "xelim tanzaniano"
 	},
 	"UGX": {
-		"name": "Xelim ugandense"
+		"name": "xelim ugandense"
 	},
 	"CNY": {
 		"name": "yuan",

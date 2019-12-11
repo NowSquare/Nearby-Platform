@@ -2,6 +2,38 @@
 
 ## 1.*
 
+### [1.2.0] - 2019-11-12
+
+Updated Imagine dependency version, to `^1.2`.
+
+### [1.1.5] - 2019-09-27
+
+Added [kyranb](https://github.com/czim/file-handling/commits?author=kyranb)'s ImageOptimizationStrategy.
+
+### [1.1.4] - 2019-09-26
+
+Added check for file extension for image auto-orient strategy to avoid trying to read EXIF data from formats that do not support it.
+
+### [1.1.3] - 2019-07-21
+
+Improved error handling in UrlDownloader.
+
+### [1.1.2] - 2019-07-19
+
+- FileHandler now returns a `ProcessResult` object for `process()` and `processSingleVariant()`. The result containts both the array of stored files as well as a list of temporary files created while processing.
+- Added `getTemporaryFiles()` and `clearTemporaryFiles()` to the VariantProcessor.
+- No longer marks copies as 'uploaded'.
+- Added `delete()` to the StorableFileInterface and implementations. If you're upgrading, make sure to check your own implementations of this interface.
+- Made exif errors silent (using the dreaded @) for now, *if* quiet mode is enabled.
+
+### [1.0.4] - 2019-01-09
+
+Improved the `StorableFileFactory`: now accepts StorableFile instances and better handles raw content.
+
+### [1.0.3] - 2018-10-29
+
+Fixed resizer to allow use of either `convertOptions` or `convert_options` in configuration options. 
+
 
 ### [1.0.2] - 2018-08-02
 
@@ -30,6 +62,15 @@ Please take care when updating, this will likely affect any code relying on this
 - Updated `StorageInterface` and `LaravelStorage` to expect a *full* path, including the filename, rather than only a directory.
 
 
+[1.2.0]: https://github.com/czim/file-handling/compare/1.1.5...1.2.0
+[1.1.5]: https://github.com/czim/file-handling/compare/1.1.4...1.1.5
+[1.1.4]: https://github.com/czim/file-handling/compare/1.1.3...1.1.4
+[1.1.3]: https://github.com/czim/file-handling/compare/1.1.2...1.1.3
+[1.1.2]: https://github.com/czim/file-handling/compare/1.1.1...1.1.2
+[1.1.1]: https://github.com/czim/file-handling/compare/1.1.0...1.1.1
+[1.1.0]: https://github.com/czim/file-handling/compare/1.0.4...1.1.0
+[1.0.4]: https://github.com/czim/file-handling/compare/1.0.3...1.0.4
+[1.0.3]: https://github.com/czim/file-handling/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/czim/file-handling/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/czim/file-handling/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/czim/file-handling/compare/0.9.10...1.0.0

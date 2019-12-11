@@ -1,6 +1,6 @@
 <?php
 /* ===========================================================================
- * Copyright (c) 2018 Zindex Software
+ * Copyright (c) 2018-2019 Zindex Software
  *
  * Licensed under the MIT License
  * =========================================================================== */
@@ -10,6 +10,7 @@ namespace Opis\Closure;
 
 /**
  * Helper class used to indicate a reference to an object
+ * @internal
  */
 class SelfReference
 {

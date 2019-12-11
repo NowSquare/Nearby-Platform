@@ -6,6 +6,7 @@ use Czim\FileHandling\Contracts\Storage\StorableFileFactoryInterface;
 use Czim\FileHandling\Contracts\Storage\StorableFileInterface;
 use Czim\FileHandling\Contracts\Variant\VariantStrategyFactoryInterface;
 use Czim\FileHandling\Contracts\Variant\VariantStrategyInterface;
+use Czim\FileHandling\Exceptions\VariantStrategyNotAppliedException;
 use Czim\FileHandling\Exceptions\VariantStrategyShouldNotBeAppliedException;
 use Czim\FileHandling\Test\TestCase;
 use Czim\FileHandling\Variant\VariantProcessor;
@@ -22,7 +23,7 @@ class VariantProcessorTest extends TestCase
      */
     protected $vfsRoot;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -77,10 +78,11 @@ class VariantProcessorTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Czim\FileHandling\Exceptions\VariantStrategyNotAppliedException
      */
     function it_throws_an_exception_if_applying_returns_false()
     {
+        $this->expectException(VariantStrategyNotAppliedException::class);
+
         $fileFactory     = $this->getMockFileFactory();
         $strategyFactory = $this->getMockStrategyFactory();
 
@@ -105,10 +107,11 @@ class VariantProcessorTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Czim\FileHandling\Exceptions\VariantStrategyNotAppliedException
      */
     function it_throws_an_exception_if_strategy_should_not_be_applied_and_configured_to()
     {
+        $this->expectException(VariantStrategyNotAppliedException::class);
+
         $fileFactory     = $this->getMockFileFactory();
         $strategyFactory = $this->getMockStrategyFactory();
 
@@ -162,6 +165,43 @@ class VariantProcessorTest extends TestCase
         static::assertEquals('text/plain', $variant->mimeType());
     }
 
+    /**
+     * @test
+     */
+    function it_tracks_and_clears_temporary_files_created_while_processing()
+    {
+        $fileFactory     = $this->getMockFileFactory();
+        $strategyFactory = $this->getMockStrategyFactory();
+
+        $processor = new VariantProcessor($fileFactory, $strategyFactory);
+
+        // Prepare mock source file
+        vfsStream::newFile('file')->at($this->vfsRoot)->setContent('dummy contents');
+        $tmpPath = $this->vfsRoot->url() . '/file';
+
+        $target = $this->makeMockTargetStorableFile();
+        $source = $this->makeMockSourceStorableFile($tmpPath);
+
+        $fileFactory->shouldReceive('uploaded')->once()->andReturnSelf();
+        $fileFactory->shouldReceive('makeFromLocalPath')->once()->andReturn($target);
+
+        // Prepare mock strategy
+        $mockStrategy = $this->makeMockVariantStrategy();
+        $strategyFactory->shouldReceive('make')->with('test-strategy')->once()->andReturn($mockStrategy);
+
+
+        static::assertCount(0, $processor->getTemporaryFiles());
+
+        $processor->process($source, 'variant', [ 'test-strategy' => ['test' => 'a'] ]);
+
+        static::assertCount(1, $processor->getTemporaryFiles());
+        static::assertInstanceOf(StorableFileInterface::class, $processor->getTemporaryFiles()[0]);
+
+
+        $processor->clearTemporaryFiles();
+
+        static::assertCount(0, $processor->getTemporaryFiles());
+    }
 
 
     // ------------------------------------------------------------------------------
@@ -172,9 +212,9 @@ class VariantProcessorTest extends TestCase
      * @param string $path
      * @return StorableFileInterface|Mockery\MockInterface
      */
-    protected function makeMockTargetStorableFile($path = '/copy/path')
+    protected function makeMockTargetStorableFile(string $path = '/copy/path')
     {
-        /** @var Mockery\MockInterface|StorableFileInterface $source */
+        /** @var Mockery\Mock|Mockery\MockInterface|StorableFileInterface $target */
         $target = Mockery::mock(StorableFileInterface::class);
         $target->shouldReceive('path')->andReturn($path);
 
@@ -186,9 +226,9 @@ class VariantProcessorTest extends TestCase
      * @param string $mimeType
      * @return StorableFileInterface|Mockery\MockInterface
      */
-    protected function makeMockSourceStorableFile($tmpPath, $mimeType = 'text/plain')
+    protected function makeMockSourceStorableFile(string $tmpPath, string $mimeType = 'text/plain')
     {
-        /** @var Mockery\MockInterface|StorableFileInterface $source */
+        /** @var Mockery\Mock|Mockery\MockInterface|StorableFileInterface $source */
         $source = Mockery::mock(StorableFileInterface::class);
         $source->shouldReceive('path')->andReturn($tmpPath);
         $source->shouldReceive('mimeType')->andReturn($mimeType);
@@ -216,6 +256,7 @@ class VariantProcessorTest extends TestCase
         $shouldApply = true,
         $options = ['test' => 'a']
     ) {
+        /** @var Mockery\Mock|Mockery\MockInterface|VariantStrategyInterface $mock */
         $mock = Mockery::mock(VariantStrategyInterface::class);
         $mock->shouldReceive('setOptions')->once()->with($options)->andReturnSelf();
 
@@ -237,7 +278,7 @@ class VariantProcessorTest extends TestCase
 
 
     /**
-     * @return Mockery\MockInterface|StorableFileFactoryInterface
+     * @return Mockery\Mock|Mockery\MockInterface|StorableFileFactoryInterface
      */
     protected function getMockFileFactory()
     {
@@ -245,7 +286,7 @@ class VariantProcessorTest extends TestCase
     }
 
     /**
-     * @return Mockery\MockInterface|VariantStrategyFactoryInterface
+     * @return Mockery\Mock|Mockery\MockInterface|VariantStrategyFactoryInterface
      */
     protected function getMockStrategyFactory()
     {

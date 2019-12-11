@@ -1,11 +1,14 @@
 <?php namespace Barryvdh\Snappy;
 
-use Illuminate\Support\Facades\View;
+use Illuminate\View\View;
 use PHPUnit\Framework\Assert as PHPUnit;
+use Illuminate\Support\Facades\View as ViewFacade;
+
 
 class PdfFaker extends PdfWrapper
 {
 	protected $view;
+	protected $filename;
 
 	/**
      * Load a View and convert to HTML
@@ -17,7 +20,7 @@ class PdfFaker extends PdfWrapper
      */
     public function loadView($view, $data = array(), $mergeData = array())
     {
-        $this->view = View::make($view, $data, $mergeData);
+        $this->view = ViewFacade::make($view, $data, $mergeData);
         return parent::loadView($view, $data, $mergeData);
     }
 
@@ -60,7 +63,7 @@ class PdfFaker extends PdfWrapper
 
         if (is_null($value)) {
             PHPUnit::assertArrayHasKey($key, $this->view->getData());
-        } elseif ($value instanceof Closure) {
+        } elseif ($value instanceof \Closure) {
             PHPUnit::assertTrue($value($this->view->$key));
         } else {
             PHPUnit::assertEquals($value, $this->view->$key);
@@ -153,6 +156,19 @@ class PdfFaker extends PdfWrapper
         PHPUnit::assertNotContains($value, strip_tags($this->html));
 
         return $this;
+    }
+    
+    /**
+     * Assert that the given string is equal to the saved filename.
+     *
+     * @param  string  $value
+     * @return $this
+     */
+    public function assertFileNameIs($value)
+    {
+    	PHPUnit::assertEquals($value, $this->filename);
+
+    	return $this;
     }
 
     public function output()
@@ -275,6 +291,7 @@ startxref
      */
     public function save($filename, $overwrite = false)
     {
+	$this->filename = $filename;
         return $this;
     }
 }

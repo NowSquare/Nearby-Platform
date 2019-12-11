@@ -1,9 +1,11 @@
 <?php
 namespace Czim\FileHandling\Test\Unit\Storage\File;
 
+use Czim\FileHandling\Exceptions\StorableFileCouldNotBeDeletedException;
 use Czim\FileHandling\Storage\File\ProcessableFile;
 use Czim\FileHandling\Test\TestCase;
 use org\bovigo\vfs\vfsStream;
+use RuntimeException;
 use SplFileInfo;
 
 class ProcessableFileTest extends TestCase
@@ -40,10 +42,11 @@ class ProcessableFileTest extends TestCase
 
     /**
      * @test
-     * @expectedException \RuntimeException
      */
     function it_throws_an_exception_if_the_referenced_path_is_not_found()
     {
+        $this->expectException(RuntimeException::class);
+
         $file = new ProcessableFile;
 
         $fileInfo = new SplFileInfo('/no/file/exists/here');
@@ -64,7 +67,7 @@ class ProcessableFileTest extends TestCase
 
         static::assertEquals($fileInfo->getSize(), $file->size());
     }
-    
+
     /**
      * @test
      */
@@ -99,11 +102,59 @@ class ProcessableFileTest extends TestCase
     }
 
     /**
-     * @return string
+     * @test
      */
-    protected function getExampleLocalPath()
+    function it_deletes_its_file()
+    {
+        // We cannot mock this with vfs, since the getRealPath() method on SplFileInfo is used.
+
+        $deletablePath = $this->getDeletableLocalPath();
+
+        copy($this->getExampleLocalPath(), $deletablePath);
+
+        static::assertTrue(file_exists($deletablePath), 'Deletable file setup failed');
+
+        $file = new ProcessableFile();
+        $file->setData(new SplFileInfo($this->getDeletableLocalPath()));
+
+        $file->delete();
+
+        static::assertFalse(file_exists($deletablePath), 'File was not deleted');
+    }
+
+    /**
+     * @test
+     */
+    function it_throws_an_exception_attempting_to_delete_a_nonexistent_path()
+    {
+        // We cannot mock this with vfs, since the getRealPath() method on SplFileInfo is used.
+
+        $deletablePath = $this->getDeletableLocalPath();
+
+        copy($this->getExampleLocalPath(), $deletablePath);
+
+        static::assertTrue(file_exists($deletablePath), 'Deletable file setup failed');
+
+        $file = new ProcessableFile();
+        $file->setData(new SplFileInfo($this->getDeletableLocalPath()));
+
+        // Delete the file so the delete call fails.
+        unlink($deletablePath);
+
+        $this->expectException(StorableFileCouldNotBeDeletedException::class);
+
+        $file->delete();
+    }
+
+
+    protected function getExampleLocalPath(): string
     {
         return realpath(dirname(__DIR__) . '/../../../' . static::XML_TEST_FILE);
+    }
+
+    protected function getDeletableLocalPath(): string
+    {
+        return realpath(dirname(__DIR__) . '/../../../') . 'deletable.txt';
     }
 
 }

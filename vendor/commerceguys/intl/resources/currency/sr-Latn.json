@@ -103,7 +103,7 @@
 		"name": "Dominikanski pezos"
 	},
 	"DJF": {
-		"name": "Džibutanski franak"
+		"name": "Džibutski franak"
 	},
 	"EGP": {
 		"name": "Egipatska funta"
@@ -303,7 +303,7 @@
 		"name": "Mauricijska rupija"
 	},
 	"MRU": {
-		"name": "Mauritanijska ogija"
+		"name": "Mauritanska ogija"
 	},
 	"MXN": {
 		"name": "Meksički pezos",
@@ -415,11 +415,11 @@
 	"SRD": {
 		"name": "Surinamski dolar"
 	},
-	"SHP": {
-		"name": "Sv. jelenska funta"
-	},
 	"SZL": {
 		"name": "Svazilendski lilangeni"
+	},
+	"SHP": {
+		"name": "Svete Jelene funta"
 	},
 	"LKR": {
 		"name": "Šrilankanska rupija"
@@ -463,6 +463,9 @@
 	"UAH": {
 		"name": "Ukrajinska hrivnja"
 	},
+	"UYW": {
+		"name": "Uruguayan Nominal Wage Index Unit"
+	},
 	"UYU": {
 		"name": "Urugvajski pezos"
 	},
@@ -472,7 +475,7 @@
 	"VUV": {
 		"name": "Vanuatski vatu"
 	},
-	"VEF": {
+	"VES": {
 		"name": "Venecuelanski bolivar"
 	},
 	"VND": {

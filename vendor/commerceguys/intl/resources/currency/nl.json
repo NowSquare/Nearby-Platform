@@ -100,7 +100,7 @@
 		"name": "Chileense peso"
 	},
 	"CNY": {
-		"name": "Chinese Yuan",
+		"name": "Chinese yuan",
 		"symbol": "CN¥"
 	},
 	"COP": {
@@ -451,13 +451,16 @@
 	"TRY": {
 		"name": "Turkse lira"
 	},
+	"UYW": {
+		"name": "Uruguayaanse nominale salarisindexeenheid"
+	},
 	"UYU": {
 		"name": "Uruguayaanse peso"
 	},
 	"VUV": {
 		"name": "Vanuatuaanse vatu"
 	},
-	"VEF": {
+	"VES": {
 		"name": "Venezolaanse bolivar"
 	},
 	"AED": {

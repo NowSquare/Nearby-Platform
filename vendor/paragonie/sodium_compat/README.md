@@ -28,6 +28,10 @@ and have the funds for such an audit, please open an issue or contact
 However, sodium_compat has been adopted by high profile open source projects,
 such as [Joomla!](https://github.com/joomla/joomla-cms/blob/459d74686d2a638ec51149d7c44ddab8075852be/composer.json#L40)
 and [Magento](https://github.com/magento/magento2/blob/8fd89cfdf52c561ac0ca7bc20fd38ef688e201b0/composer.json#L44).
+Furthermore, sodium_compat was developed by Paragon Initiative Enterprises, a
+company that *specializes* in secure PHP development and PHP cryptography, and
+has been informally reviewed by many other security experts who also specialize
+in PHP.
 
 If you'd like to learn more about the defensive security measures we've taken
 to prevent sodium_compat from being a source of vulnerability in your systems,
@@ -91,6 +95,11 @@ from multiple vendors. If you need help using sodium_compat in one of your proje
 Non-commercial report will be facilitated through [Github issues](https://github.com/paragonie/sodium_compat/issues).
 We offer no guarantees of our availability to resolve questions about integrating sodium_compat into third-party
 software for free, but will strive to fix any bugs (security-related or otherwise) in our library.
+
+## Support Contracts
+
+If your company uses this library in their products or services, you may be
+interested in [purchasing a support contract from Paragon Initiative Enterprises](https://paragonie.com/enterprise).
 
 # Using Sodium Compat
 
@@ -193,6 +202,22 @@ There are three ways to make it fast:
       without harming the security of your cryptography keys. If your processor *isn't* safe, then decide whether you
       want speed or security because you can't have both.
 
+### How can I tell if sodium_compat will be slow, at runtime?
+
+Since version 1.8, you can use the `polyfill_is_fast()` static method to
+determine if sodium_compat will be slow at runtime.
+
+```php
+<?php
+if (ParagonIE_Sodium_Compat::polyfill_is_fast()) {
+    // Use libsodium now
+    $process->execute();
+} else {
+    // Defer to a cron job or other sort of asynchronous process
+    $process->enqueue();
+}
+```
+
 ### Help, my PHP only has 32-Bit Integers! It's super slow!
 
 Some features of sodium_compat are ***incredibly slow* with PHP 5 on Windows**
@@ -201,11 +226,23 @@ affected), and there is nothing we can do about that, due to platform
 restrictions on integers.
 
 For acceptable performance, we highly recommend Windows users to version 1.0.6
-of the libsodium extension from PECL or. Alternatively, simply upgrade to PHP 7
+of the libsodium extension from PECL or, alternatively, simply upgrade to PHP 7
 and the slowdown will be greatly reduced.
 
 This is also true of non-Windows 32-bit operating systems, or if somehow PHP
 was compiled where `PHP_INT_SIZE` equals `4` instead of `8` (i.e. Linux on i386).
+
+## Documentation
+
+First, you'll want to read the [Libsodium Quick Reference](https://paragonie.com/blog/2017/06/libsodium-quick-reference-quick-comparison-similar-functions-and-which-one-use).
+It aims to answer, "Which function should I use for [common problem]?".
+
+If you don't find the answers in the Quick Reference page, check out
+[*Using Libsodium in PHP Projects*](https://paragonie.com/book/pecl-libsodium).
+
+Finally, the [official libsodium documentation](https://download.libsodium.org/doc/) 
+(which was written for the C library, not the PHP library) also contains a lot of
+insightful technical information you may find helpful.
 
 ## API Coverage
 
@@ -250,6 +287,21 @@ was compiled where `PHP_INT_SIZE` equals `4` instead of `8` (i.e. Linux on i386)
         * `crypto_stream()`
         * `crypto_stream_xor()`
     * Other utilities (e.g. `crypto_*_keypair()`)
+        * `add()`
+        * `base642bin()`
+        * `bin2base64()`
+        * `bin2hex()`
+        * `hex2bin()`
+        * `crypto_kdf_derive_from_key()`
+        * `crypto_kx_client_session_keys()`
+        * `crypto_kx_server_session_keys()`
+        * `crypto_secretstream_xchacha20poly1305_init_push()`
+        * `crypto_secretstream_xchacha20poly1305_push()`
+        * `crypto_secretstream_xchacha20poly1305_init_pull()`
+        * `crypto_secretstream_xchacha20poly1305_pull()`
+        * `crypto_secretstream_xchacha20poly1305_rekey()`
+        * `pad()`
+        * `unpad()`
 
 ### Cryptography Primitives Provided
 
@@ -283,3 +335,13 @@ was compiled where `PHP_INT_SIZE` equals `4` instead of `8` (i.e. Linux on i386)
   `ParagonIE_Sodium_Compat::crypto_pwhash_is_available()`, which returns a
    boolean value (`TRUE` or `FALSE`).
 
+### PHPCompatibility Ruleset
+
+For sodium_compat users and that utilize [`PHPCompatibility`](https://github.com/PHPCompatibility/PHPCompatibility)
+in their CI process, there is now a custom ruleset available which can be used
+to prevent false positives being thrown by `PHPCompatibility` for the native
+PHP functionality being polyfilled by this repo.
+
+You can find the repo for the `PHPCompatibilityParagonieSodiumCompat` ruleset
+here [on Github](https://github.com/PHPCompatibility/PHPCompatibilityParagonie) 
+and [on Packagist](https://packagist.org/packages/phpcompatibility/phpcompatibility-paragonie).

@@ -55,6 +55,8 @@ tfoot { display:table-footer-group; }
 
 *A*: Please, check your `wkhtmltopdf` version. It is recommended to use at least `0.12.2.1` and what is important - starting from `wkhtmltopdf >= 0.12.2` it doesn't require X server or emulation anymore. You can download new version from http://wkhtmltopdf.org/downloads.html or install via composer for Linux servers as stated in [README](https://github.com/KnpLabs/snappy#wkhtmltopdf-binary-as-composer-dependencies). If there is no possibility to update `wkhtmltopdf`, please check http://stackoverflow.com/questions/9604625/wkhtmltopdf-cannot-connect-to-x-server
 
+###### *Q*: PDF generation failed with wkhtmltopdf returning error code 1 due to ContentNotFoundError, how do I deal with that?
+*A*: This is a known problem with wkhtmltopdf. Several issues has been raised: [issue 1855](https://github.com/wkhtmltopdf/wkhtmltopdf/issues/1855), [issue 2051](https://github.com/wkhtmltopdf/wkhtmltopdf/issues/2051). To catch that error, `generate` method will throw a `RuntimeException` with error code equals to the error code returned with wkhtmltopdf, catch this exception and check for the error code and then deal with this exception in appropriate ways.
 
 ###### *Q*: My PDF is always generated for a small screen resolution\I always receive a mobile version.
 
@@ -161,7 +163,17 @@ at the same time: it processes the first one, send the first response and only t
 
 ###### *Q*: How to proceed when experiencing `ContentNotFound`, `ConnectionRefusedError` or timeouts?
 
-*A*: When you experience errors like `ContentNotFound`, `ConnectionRefusedError` or timeouts it is hard to know what is failing. The best you can do to narrow the scope of the bug is to slightly change your HTML code until you found the culprit. 
-Start by removing whole parts, like document body. If that's now working, re-add it but now remove one half of its content. And repeat again and again until you find which URLs is buggy.
+*A*: When you experience errors like `ContentNotFound` or `ConnectionRefusedError`, try to turn off `quiet` option and 
+look at Snappy logs (you have to set up a logger first).
 
-There's one more (better) way though: fire up tcpdump or wireshark and listen for http requests. You should see which request(s) is failing, and you can even check the content of the request/response.
+If you experience timeouts, it might be hard to know what is failing. The best you can do to narrow the scope of the bug
+is to slightly change your HTML code until you found the culprit. Start by removing whole parts, like document body to 
+know if it comes from something in the body or something in the head. If that's now working, re-add it but now remove 
+one half of its content. And repeat again and again until you find which URLs is buggy.
+
+There's one more (better) way though: fire up tcpdump or wireshark and listen for http requests. You should see which 
+request(s) is failing, and you can even check the content of the request/response.
+
+###### *Q*: My custom fonts aren't smooth
+
+According to #326, you shall prefer using SVG versions of your custom fonts to have a better font smoothing.

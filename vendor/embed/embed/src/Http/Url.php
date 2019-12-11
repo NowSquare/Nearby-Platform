@@ -241,10 +241,10 @@ class Url
     public function getDirectoryPosition($position)
     {
         if ($position === count($this->info['path'])) {
-            return $this->info['file'];
+            return urldecode($this->info['file']);
         }
 
-        return isset($this->info['path'][$position]) ? $this->info['path'][$position] : null;
+        return isset($this->info['path'][$position]) ? urldecode($this->info['path'][$position]) : null;
     }
 
     /**
@@ -540,10 +540,6 @@ class Url
         foreach ((array) $query as $key => $value) {
             $this->info['query'][hex2bin($key)] = $value;
         }
-
-        array_walk_recursive($this->info['query'], function (&$value) {
-            $value = urldecode($value);
-        });
     }
 
     /**
@@ -603,17 +599,17 @@ class Url
             $path = substr($path, 0, -strlen($file));
 
             if (preg_match('/(.*)\.([\w]+)$/', $file, $match)) {
-                $this->info['file'] = urldecode($match[1]);
+                $this->info['file'] = rawurldecode($match[1]);
                 $this->info['extension'] = $match[2];
             } else {
-                $this->info['file'] = urldecode($file);
+                $this->info['file'] = rawurldecode($file);
             }
         }
 
         $this->info['path'] = [];
 
         foreach (explode('/', $path) as $dir) {
-            $dir = urldecode($dir);
+            $dir = rawurldecode($dir);
 
             if ($dir !== '') {
                 $this->info['path'][] = $dir;
@@ -624,7 +620,7 @@ class Url
     private static function getSuffixes()
     {
         if (self::$public_suffix_list === null) {
-            self::$public_suffix_list = include __DIR__.'/../resources/public_suffix_list.php';
+            self::$public_suffix_list = (@include __DIR__.'/../resources/public_suffix_list.php') ?: [];
         }
 
         return self::$public_suffix_list;
@@ -643,7 +639,7 @@ class Url
         $enc_url = preg_replace_callback(
             '%[^:/@?&=#]+%usD',
             function ($matches) {
-                return urlencode($matches[0]);
+                return rawurlencode($matches[0]);
             },
             $url
         );
@@ -659,17 +655,16 @@ class Url
         }
 
         foreach ($parts as $name => $value) {
-            $parts[$name] = urldecode($value);
+            $parts[$name] = rawurldecode($value);
         }
-
         return $parts;
     }
 
     private static function urlEncode($path)
     {
         // : - used for files
-        // @ and , - used for GoogleMaps adapter url (in view and streetview modes)
-        return str_replace(['%3A','%40','%2C'], [':','@',','], urlencode($path));
+        // @, + and , - used for GoogleMaps adapter url (in view and streetview modes)
+        return str_replace(['%3A','%40','%2C', '%2B'], [':','@',',', '+'], rawurlencode($path));
     }
 
     private static function validUrlOrEmpty($url)

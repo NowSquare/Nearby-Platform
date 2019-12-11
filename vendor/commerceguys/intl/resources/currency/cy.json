@@ -15,7 +15,7 @@
 	"ETB": {
 		"name": "Birr Ethiopia"
 	},
-	"VEF": {
+	"VES": {
 		"name": "Bolívar Venezuela"
 	},
 	"BOB": {
@@ -325,6 +325,9 @@
 		"name": "Peso Mecsico",
 		"symbol": "MX$"
 	},
+	"PHP": {
+		"name": "Peso Philipinas"
+	},
 	"CUC": {
 		"name": "Peso Trosadwy Ciwba"
 	},
@@ -333,9 +336,6 @@
 	},
 	"ARS": {
 		"name": "Peso yr Ariannin"
-	},
-	"PHP": {
-		"name": "Peso’r Philipinau"
 	},
 	"BWP": {
 		"name": "Pula Botswana"
@@ -469,6 +469,9 @@
 	},
 	"MNT": {
 		"name": "Tugrik Mongolia"
+	},
+	"UYW": {
+		"name": "Uruguayan Nominal Wage Index Unit"
 	},
 	"VUV": {
 		"name": "Vatu Vanuatu"

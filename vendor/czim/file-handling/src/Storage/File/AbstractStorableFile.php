@@ -2,8 +2,10 @@
 namespace Czim\FileHandling\Storage\File;
 
 use Czim\FileHandling\Contracts\Storage\StorableFileInterface;
+use Czim\FileHandling\Contracts\Storage\UploadedMarkableInterface;
+use Czim\FileHandling\Exceptions\StorableFileCouldNotBeDeletedException;
 
-abstract class AbstractStorableFile implements StorableFileInterface
+abstract class AbstractStorableFile implements StorableFileInterface, UploadedMarkableInterface
 {
 
     /**
@@ -42,6 +44,18 @@ abstract class AbstractStorableFile implements StorableFileInterface
      * @return bool
      */
     abstract public function copy($path);
+
+    /**
+     * Deletes the storable file (if possible and allowed).
+     *
+     * @throws StorableFileCouldNotBeDeletedException
+     */
+    public function delete()
+    {
+        throw new StorableFileCouldNotBeDeletedException(
+            "File of type '" . get_class($this) . "' may not be deleted"
+        );
+    }
 
     /**
      * Sets the mime type for the file.

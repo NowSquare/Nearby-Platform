@@ -14,7 +14,7 @@
 	"ETB": {
 		"name": "birr éthiopien"
 	},
-	"VEF": {
+	"VES": {
 		"name": "bolivar vénézuélien"
 	},
 	"BOB": {
@@ -91,8 +91,7 @@
 		"symbol": "$AU"
 	},
 	"BSD": {
-		"name": "dollar bahaméen",
-		"symbol": "$BS"
+		"name": "dollar bahaméen"
 	},
 	"BBD": {
 		"name": "dollar barbadien"
@@ -476,13 +475,16 @@
 	},
 	"WST": {
 		"name": "tala samoan",
-		"symbol": "WS$"
+		"symbol": "$WS"
 	},
 	"KZT": {
 		"name": "tenge kazakh"
 	},
 	"MNT": {
 		"name": "tugrik mongol"
+	},
+	"UYW": {
+		"name": "Uruguayan Nominal Wage Index Unit"
 	},
 	"VUV": {
 		"name": "vatu vanuatuan"

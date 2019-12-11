@@ -1,6 +1,73 @@
 CHANGELOG
 ---------
 
+### v3.5.1, 2019.11.30
+
+- Bugfix. See #47
+
+### v3.5.0, 2019.11.29
+
+- Added support for short closures (arrow functions)
+- Added `isShortClosure` method to `Opis\Closure\ReflectionClosure`
+
+### v3.4.2, 2019.11.29
+
+- Added `stream_set_option()`
+
+### v3.4.1, 2019.10.19
+
+- Fixed a [bug](https://github.com/opis/closure/issues/40) that prevented serialization to work correctly.
+
+### v3.4.0, 2019.09.03
+
+- Added `createClosure` static method in `Opis\Closure\SerializableClosure`.
+This method creates a new closure from arbitrary code, emulating `create_function`,
+but without using eval
+
+### v3.3.1, 2019.07.10
+
+- Use `sha1` instead of `md5` for hashing file names in `Opis\Closure\ReflectionClosure` class
+
+### v3.3.0, 2019.05.31
+
+- Fixed a bug that prevented signed closures to properly work when the serialized string
+contains invalid UTF-8 chars. Starting with this version `json_encode` is no longer used
+when signing a closure. Backward compatibility is maintained and all closures that were 
+previously signed using the old method will continue to work.
+
+### v3.2.0, 2019.05.05
+
+- Since an unsigned closure can be unserialized when no security provider is set, 
+there is no reason to treat differently a signed closure in the same situation.
+Therefore, the `Opis\Closure\SecurityException` exception  is no longer thrown when 
+unserializing a signed closure, if no security provider is set.
+
+### v3.1.6, 2019.02.22
+
+- Fixed a bug that occurred when trying to set properties of classes that were not defined in user-land.
+Those properties are now ignored.
+
+### v3.1.5, 2019.01.14
+
+- Improved parser
+
+### v3.1.4, 2019.01.14
+
+- Added support for static methods that are named using PHP keywords or magic constants.
+Ex: `A::new()`, `A::use()`, `A::if()`, `A::function()`, `A::__DIR__()`, etc.
+- Used `@internal` to mark classes & methods that are for internal use only and
+backward compatibility is not guaranteed.
+
+### v3.1.3, 2019.01.07
+
+- Fixed a bug that prevented traits to be correctly resolved when used by an
+anonymous class
+- Fixed a bug that occurred when `$this` keyword was used inside an anonymous class
+
+### v3.1.2, 2018.12.16
+
+* Fixed a bug regarding comma trail in group-use statements. See [issue 23](https://github.com/opis/closure/issues/23)
+
 ### v3.1.1, 2018.10.02
 
 * Fixed a bug where `parent` keyword was treated like a class-name and scope was not added to the

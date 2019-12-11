@@ -57,30 +57,7 @@ class Response extends AbstractResponse
                     return $this->htmlContent = false;
                 }
 
-                $errors = libxml_use_internal_errors(true);
-                $entities = libxml_disable_entity_loader(true);
-
-                $this->htmlContent = new DOMDocument();
-
-                if (mb_detect_encoding($content, 'UTF-8', true) === 'UTF-8') {
-                    $content = mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8');
-                    $content = preg_replace(
-                        '/<head[^>]*>/',
-                        '<head><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">',
-                        $content
-                    );
-                } elseif (mb_detect_encoding($content, 'SJIS', true) === 'SJIS') {
-                    $content = mb_convert_encoding($content, 'HTML-ENTITIES', 'SJIS');
-                    $content = preg_replace('/<head[^>]*>/', '<head><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=shift_jis">', $content);
-                } elseif (mb_detect_encoding($content, 'ISO-8859-1', true) === 'ISO-8859-1') {
-                    $content = mb_convert_encoding($content, 'HTML-ENTITIES', 'ISO-8859-1');
-                    $content = preg_replace('/<head[^>]*>/', '<head><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">', $content);
-                }
-
-                $this->htmlContent->loadHTML(trim($content));
-
-                libxml_use_internal_errors($errors);
-                libxml_disable_entity_loader($entities);
+                $this->htmlContent = Utils::parse($content);
             } catch (Exception $exception) {
                 return $this->htmlContent = false;
             }

@@ -1,6 +1,7 @@
 # Snappy
 
-[![Build Status](https://travis-ci.org/KnpLabs/snappy.svg?branch=master)](https://travis-ci.org/KnpLabs/snappy)
+[![Travis CI Build Status](https://travis-ci.org/KnpLabs/snappy.svg?branch=master)](https://travis-ci.org/KnpLabs/snappy)
+[![AppVeyor CI Build Status](https://ci.appveyor.com/api/projects/status/github/KnpLabs/snappy?branch=master&svg=true)](https://ci.appveyor.com/project/NiR-/snappy)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/KnpLabs/Gaufrette/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/KnpLabs/Gaufrette/?branch=master)
 [![StyleCI](https://styleci.io/repos/723980/shield?branch=master)](https://styleci.io/repos/723980)
 
@@ -12,15 +13,10 @@ You will have to download wkhtmltopdf `0.12.x` in order to use Snappy.
 
 Please, check [FAQ](doc/faq.md) before opening a new issue. Snappy is a tiny wrapper around wkhtmltox, so lots of issues are already answered, resolved or wkhtmltox ones.
 
-[![Build Status](https://secure.travis-ci.org/KnpLabs/snappy.png?branch=master)](http://travis-ci.org/KnpLabs/snappy)
-
 Following integrations are available:
 * [`knplabs/knp-snappy-bundle`](https://github.com/KnpLabs/KnpSnappyBundle), for Symfony
 * [`barryvdh/laravel-snappy`](https://github.com/barryvdh/laravel-snappy), for Laravel
-
-## Current maintainer(s)
-
-* [NiR-](https://github.com/NiR-)
+* [`mvlabs/mvlabs-snappy`](https://github.com/mvlabs/MvlabsSnappy), for Zend Framework
 
 ## Installation using [Composer](http://getcomposer.org/)
 
@@ -50,6 +46,14 @@ $snappy->setBinary('/usr/local/bin/wkhtmltopdf');
 ```php
 $snappy = new Pdf('/usr/local/bin/wkhtmltopdf');
 header('Content-Type: application/pdf');
+echo $snappy->getOutput('http://www.github.com');
+```
+
+### Download the pdf from the browser
+
+```php
+$snappy = new Pdf('/usr/local/bin/wkhtmltopdf');
+header('Content-Type: application/pdf');
 header('Content-Disposition: attachment; filename="file.pdf"');
 echo $snappy->getOutput('http://www.github.com');
 ```
@@ -62,7 +66,7 @@ header('Content-Disposition: attachment; filename="file.pdf"');
 echo $snappy->getOutput(array('http://www.github.com','http://www.knplabs.com','http://www.php.net'));
 ```
 
-### Generate local pdf file 
+### Generate local pdf file
 ```php
 $snappy = new Pdf('/usr/local/bin/wkhtmltopdf');
 $snappy->generateFromHtml('<h1>Bill</h1><p>You owe me money, dude.</p>', '/tmp/bill-123.pdf');
@@ -116,7 +120,7 @@ $snappy = new Pdf($myProjectDirectory . '/vendor/h4cc/wkhtmltopdf-i386/bin/wkhtm
 $snappy = new Pdf($myProjectDirectory . '/vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64');
 ```
 
-*N.B.* These static binaries are extracted from  [Debian7 packages](https://github.com/h4cc/wkhtmltopdf-amd64/issues/13#issuecomment-150948179), so it might not be compatible with non-debian based linux distros 
+*N.B.* These static binaries are extracted from  [Debian7 packages](https://github.com/h4cc/wkhtmltopdf-amd64/issues/13#issuecomment-150948179), so it might not be compatible with non-debian based linux distros
 ## Some use cases
 
 If you want to generate table of contents and you want to use custom XSL stylesheet, do the following:
@@ -133,7 +137,7 @@ $snappy->generateFromHtml('<p>Some content</p>', 'test.pdf');
 
 ## Bugs & Support
 
-If you found a bug please fill a detailed issue with all the following points.  
+If you found a bug please fill a detailed issue with all the following points.
 If you need some help, please at least provide a complete reproducer so we could help you based on facts rather than assumptions.
 
 * OS and its version
@@ -141,6 +145,14 @@ If you need some help, please at least provide a complete reproducer so we could
 * A complete reproducer with relevant php and html/css/js code
 
 If your reproducer is big, please try to shrink it. It will help everyone to narrow the bug.
+
+## Maintainers
+
+KNPLabs is looking for maintainers ([see why](https://knplabs.com/en/blog/news-for-our-foss-projects-maintenance)).
+
+If you are interested, feel free to open a PR to ask to be added as a maintainer.
+
+We’ll be glad to hear from you :)
 
 ## Credits
 

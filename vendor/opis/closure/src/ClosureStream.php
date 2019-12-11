@@ -1,12 +1,15 @@
 <?php
 /* ===========================================================================
- * Copyright (c) 2018 Zindex Software
+ * Copyright (c) 2018-2019 Zindex Software
  *
  * Licensed under the MIT License
  * =========================================================================== */
 
 namespace Opis\Closure;
 
+/**
+ * @internal
+ */
 class ClosureStream
 {
     const STREAM_PROTO = 'closure';
@@ -36,6 +39,11 @@ class ClosureStream
     public function stream_eof()
     {
         return $this->pointer >= $this->length;
+    }
+
+    public function stream_set_option($option, $arg1, $arg2)
+    {
+        return false;
     }
 
     public function stream_stat()

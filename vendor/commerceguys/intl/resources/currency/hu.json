@@ -8,6 +8,9 @@
 	"DZD": {
 		"name": "algériai dínár"
 	},
+	"GBP": {
+		"name": "angol font"
+	},
 	"AOA": {
 		"name": "angolai kwanza"
 	},
@@ -35,6 +38,9 @@
 	"BBD": {
 		"name": "barbadosi dollár"
 	},
+	"BYN": {
+		"name": "belarusz rubel"
+	},
 	"BZD": {
 		"name": "belize-i dollár"
 	},
@@ -58,9 +64,6 @@
 	},
 	"BRL": {
 		"name": "brazil real"
-	},
-	"GBP": {
-		"name": "brit font"
 	},
 	"BND": {
 		"name": "brunei dollár"
@@ -133,9 +136,6 @@
 	},
 	"FKP": {
 		"name": "falkland-szigeteki font"
-	},
-	"BYN": {
-		"name": "fehérorosz rubel"
 	},
 	"FJD": {
 		"name": "fidzsi dollár"
@@ -413,7 +413,7 @@
 		"name": "szudáni font"
 	},
 	"SZL": {
-		"name": "szváziföldi lilangeni"
+		"name": "szvázi lilangeni"
 	},
 	"TJS": {
 		"name": "tádzsikisztáni somoni"
@@ -454,6 +454,9 @@
 	"UYU": {
 		"name": "uruguay-i peso"
 	},
+	"UYW": {
+		"name": "Uruguayan Nominal Wage Index Unit"
+	},
 	"USD": {
 		"name": "USA-dollár"
 	},
@@ -463,11 +466,11 @@
 	"VUV": {
 		"name": "vanuatui vatu"
 	},
-	"VEF": {
+	"VES": {
 		"name": "venezuelai bolivar"
 	},
 	"VND": {
-		"name": "vietnami dong"
+		"name": "vietnámi dong"
 	},
 	"ZMW": {
 		"name": "zambiai kwacha"

@@ -1,6 +1,7 @@
 <?php
 namespace Czim\FileHandling\Test\Unit\Handler;
 
+use Czim\FileHandling\Contracts\Handler\ProcessResultInterface;
 use Czim\FileHandling\Contracts\Storage\StorableFileInterface;
 use Czim\FileHandling\Contracts\Storage\StorageInterface;
 use Czim\FileHandling\Contracts\Storage\StoredFileInterface;
@@ -13,7 +14,7 @@ use Mockery;
 class FileHandlerTest extends TestCase
 {
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }
@@ -41,13 +42,16 @@ class FileHandlerTest extends TestCase
 
         $file = $this->getMockStorableFile();
 
-        $stored = $handler->process($file, $target, ['test' => true]);
+        $result = $handler->process($file, $target, ['test' => true]);
 
-        static::assertInternalType('array', $stored);
-        static::assertCount(1, $stored);
+        static::assertInstanceOf(ProcessResultInterface::class, $result);
+        static::assertCount(1, $result->storedFiles());
+        static::assertArrayHasKey(FileHandler::ORIGINAL, $result->storedFiles());
 
-        static::assertInstanceOf(StoredFileInterface::class, $stored[ FileHandler::ORIGINAL ]);
-        static::assertSame($storedMock, $stored[ FileHandler::ORIGINAL ]);
+        $stored = $result->storedFiles()[FileHandler::ORIGINAL];
+
+        static::assertInstanceOf(StoredFileInterface::class, $stored);
+        static::assertSame($storedMock, $stored);
     }
 
     /**
@@ -62,6 +66,7 @@ class FileHandlerTest extends TestCase
         $file           = $this->getMockStorableFile();
         $storedMock     = $this->getMockStoredFile();
         $storedTinyMock = $this->getMockStoredFile();
+        $temporaryMock  = $this->getMockStoredFile();
 
         $tinyVariantConfig = [
             'resize'     => ['dimensions' => '10x10'],
@@ -80,6 +85,9 @@ class FileHandlerTest extends TestCase
             ->once()
             ->andReturn($storedTinyMock);
 
+        $processor->shouldReceive('clearTemporaryFiles');
+        $processor->shouldReceive('getTemporaryFiles')->andReturn([$temporaryMock]);
+
         $storage->shouldReceive('store')
             ->with(Mockery::type(StorableFileInterface::class), 'test/target/path/original/file.txt')
             ->once()
@@ -92,19 +100,29 @@ class FileHandlerTest extends TestCase
 
         $handler = new FileHandler($storage, $processor);
 
-        $stored = $handler->process($file, $target, [
+        $result = $handler->process($file, $target, [
             FileHandler::CONFIG_VARIANTS => [
                 'tiny' => $tinyVariantConfig,
             ],
         ]);
 
-        static::assertInternalType('array', $stored);
+        static::assertInstanceOf(ProcessResultInterface::class, $result);
+
+        $stored = $result->storedFiles();
+
+        static::assertCount(2, $stored);
+        static::assertArrayHasKey(FileHandler::ORIGINAL, $stored);
+        static::assertArrayHasKey('tiny', $stored);
+
         static::assertCount(2, $stored);
 
         static::assertInstanceOf(StoredFileInterface::class, $stored[ FileHandler::ORIGINAL ]);
         static::assertSame($storedMock, $stored[ FileHandler::ORIGINAL ]);
         static::assertInstanceOf(StoredFileInterface::class, $stored['tiny']);
         static::assertSame($storedTinyMock, $stored['tiny']);
+
+        static::assertCount(1, $result->temporaryFiles());
+        static::assertSame($temporaryMock, $result->temporaryFiles()[0]);
     }
 
     /**
@@ -132,6 +150,9 @@ class FileHandlerTest extends TestCase
             ->once()
             ->andReturn($storedMock);
 
+        $processor->shouldReceive('clearTemporaryFiles');
+        $processor->shouldReceive('getTemporaryFiles')->andReturn([]);
+
         $storage->shouldReceive('store')
             ->with(Mockery::type(StorableFileInterface::class), 'test/target/path/tiny/file.txt')
             ->once()
@@ -139,7 +160,12 @@ class FileHandlerTest extends TestCase
 
         $handler = new FileHandler($storage, $processor);
 
-        $stored = $handler->processVariant($file, $target, 'tiny', $tinyVariantConfig);
+        $result = $handler->processVariant($file, $target, 'tiny', $tinyVariantConfig);
+
+        static::assertCount(1, $result->storedFiles());
+        static::assertArrayHasKey('tiny', $result->storedFiles());
+
+        $stored = $result->storedFiles()['tiny'];
 
         static::assertInstanceOf(StoredFileInterface::class, $stored);
         static::assertSame($storedMock, $stored);
@@ -246,7 +272,7 @@ class FileHandlerTest extends TestCase
 
 
     /**
-     * @return Mockery\MockInterface|StorageInterface
+     * @return Mockery\Mock|Mockery\MockInterface|StorageInterface
      */
     protected function getMockStorage()
     {
@@ -254,7 +280,7 @@ class FileHandlerTest extends TestCase
     }
 
     /**
-     * @return Mockery\MockInterface|VariantProcessorInterface
+     * @return Mockery\Mock|Mockery\MockInterface|VariantProcessorInterface
      */
     protected function getMockVariantProcessor()
     {
@@ -262,7 +288,7 @@ class FileHandlerTest extends TestCase
     }
 
     /**
-     * @return Mockery\MockInterface|TargetInterface
+     * @return Mockery\Mock|Mockery\MockInterface|TargetInterface
      */
     protected function getMockTarget()
     {
@@ -270,7 +296,7 @@ class FileHandlerTest extends TestCase
     }
 
     /**
-     * @return Mockery\MockInterface|StorableFileInterface
+     * @return Mockery\Mock|Mockery\MockInterface|StorableFileInterface
      */
     protected function getMockStorableFile()
     {
@@ -278,7 +304,7 @@ class FileHandlerTest extends TestCase
     }
 
     /**
-     * @return Mockery\MockInterface|StoredFileInterface
+     * @return Mockery\Mock|Mockery\MockInterface|StoredFileInterface
      */
     protected function getMockStoredFile()
     {

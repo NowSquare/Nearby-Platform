@@ -5,17 +5,18 @@
     "homepage": "https://github.com/czim",
     "require": {
         "php": ">=5.5.9",
-        "imagine/imagine": "^0.7",
+        "imagine/imagine": "^1.2",
         "myclabs/php-enum": "^1.4",
         "psr/container": "^1.0",
-        "symfony/http-foundation": "^3.0|^4.0"
+        "symfony/http-foundation": "^3.0|^4.0",
+        "ext-curl": "*"
     },
     "require-dev": {
-        "illuminate/contracts": "^5.3",
-        "mikey179/vfsStream": "^1.6",
+        "illuminate/contracts": "^5.3|^6.0",
+        "mikey179/vfsstream": "^1.6",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~5.7",
-        "satooshi/php-coveralls": "^1.0",
+        "phpunit/phpunit": "^7.0|^8.0",
+        "php-coveralls/php-coveralls": "^2.1",
         "php-ffmpeg/php-ffmpeg": "^0.9.5"
     },
     "autoload": {
@@ -33,7 +34,8 @@
     },
     "suggest": {
         "php-ffmpeg/php-ffmpeg": "Required for video conversion and thumbnail generation",
-        "league/flysystem-aws-s3-v3": "Required for AWS S3 file storage"
+        "league/flysystem-aws-s3-v3": "Required for AWS S3 file storage",
+        "spatie/image-optimizer": "Required to use the image optimizer variant strategy"
     },
     "scripts": {
         "test": "phpunit"

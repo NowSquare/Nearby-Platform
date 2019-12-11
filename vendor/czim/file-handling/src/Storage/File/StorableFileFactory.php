@@ -3,6 +3,7 @@ namespace Czim\FileHandling\Storage\File;
 
 use Czim\FileHandling\Contracts\Storage\StorableFileFactoryInterface;
 use Czim\FileHandling\Contracts\Storage\StorableFileInterface;
+use Czim\FileHandling\Contracts\Storage\UploadedMarkableInterface;
 use Czim\FileHandling\Contracts\Support\ContentInterpreterInterface;
 use Czim\FileHandling\Contracts\Support\MimeTypeHelperInterface;
 use Czim\FileHandling\Contracts\Support\RawContentInterface;
@@ -78,6 +79,12 @@ class StorableFileFactory implements StorableFileFactoryInterface
      */
     public function makeFromAny($data, $name = null, $mimeType = null)
     {
+        // If the data is already a storable file, return it as-is.
+        if ($data instanceof StorableFileInterface) {
+            return $this->getReturnPreparedFile($data);
+        }
+
+
         if (null === $name && is_a($data, \Symfony\Component\HttpFoundation\File\UploadedFile::class)) {
             /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $data */
             $name = $data->getClientOriginalName();
@@ -87,26 +94,17 @@ class StorableFileFactory implements StorableFileFactoryInterface
             return $this->makeFromFileInfo($data, $name, $mimeType);
         }
 
-        if ( ! is_string($data)) {
-            throw new UnexpectedValueException('Could not interpret given data, string value expected');
-        }
 
-        if ( ! ($data instanceof RawContentInterface)) {
+        // Fallback: expect raw or string data, and attempt to interpret it.
+        if (is_string($data)) {
             $data = new RawContent($data);
         }
 
-        switch ($this->interpreter->interpret($data)) {
-
-            case ContentTypes::URI:
-                return $this->makeFromUrl($data->content(), $name, $mimeType);
-
-            case ContentTypes::DATAURI:
-                return $this->makeFromDataUri($data, $name, $mimeType);
-
-            case ContentTypes::RAW:
-            default:
-                return $this->makeFromRawData($data, $name, $mimeType);
+        if ( ! ($data instanceof RawContentInterface)) {
+            throw new UnexpectedValueException('Could not interpret given data, string value expected');
         }
+
+        return $this->interpretFromRawContent($data, $name, $mimeType);
     }
 
     /**
@@ -274,12 +272,38 @@ class StorableFileFactory implements StorableFileFactoryInterface
     }
 
     /**
-     * @param AbstractStorableFile $file
-     * @return AbstractStorableFile
+     * Interprets given raw content as a storable file.
+     *
+     * @param RawContentInterface $data
+     * @param string|null         $name
+     * @param string|null         $mimeType
+     * @return StorableFileInterface
+     * @throws CouldNotReadDataException
+     * @throws CouldNotRetrieveRemoteFileException
      */
-    protected function getReturnPreparedFile(AbstractStorableFile $file)
+    protected function interpretFromRawContent(RawContentInterface $data, $name, $mimeType)
     {
-        if ($this->markNextUploaded) {
+        switch ($this->interpreter->interpret($data)) {
+
+            case ContentTypes::URI:
+                return $this->makeFromUrl($data->content(), $name, $mimeType);
+
+            case ContentTypes::DATAURI:
+                return $this->makeFromDataUri($data, $name, $mimeType);
+
+            case ContentTypes::RAW:
+            default:
+                return $this->makeFromRawData($data, $name, $mimeType);
+        }
+    }
+
+    /**
+     * @param StorableFileInterface|UploadedMarkableInterface $file
+     * @return StorableFileInterface
+     */
+    protected function getReturnPreparedFile(StorableFileInterface $file)
+    {
+        if ($this->markNextUploaded && $file instanceof UploadedMarkableInterface) {
             $file->setUploaded();
             $this->markNextUploaded = false;
         }

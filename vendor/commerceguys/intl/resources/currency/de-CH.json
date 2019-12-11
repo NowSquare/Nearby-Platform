@@ -342,7 +342,7 @@
 		"name": "Paraguayischer Guaraní"
 	},
 	"PEN": {
-		"name": "Peruanischer Neuer Sol"
+		"name": "Peruanischer Sol"
 	},
 	"PHP": {
 		"name": "Philippinischer Peso"
@@ -464,6 +464,9 @@
 	"HUF": {
 		"name": "Ungarischer Forint"
 	},
+	"UYW": {
+		"name": "Uruguayan Nominal Wage Index Unit"
+	},
 	"UYU": {
 		"name": "Uruguayischer Peso"
 	},
@@ -480,7 +483,7 @@
 	"VUV": {
 		"name": "Vanuatu-Vatu"
 	},
-	"VEF": {
+	"VES": {
 		"name": "Venezolanischer Bolívar"
 	},
 	"VND": {

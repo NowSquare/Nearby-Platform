@@ -1,9 +1,11 @@
 <?php
 namespace Czim\FileHandling\Test\Unit\Storage\File;
 
+use Czim\FileHandling\Exceptions\StorableFileCouldNotBeDeletedException;
 use Czim\FileHandling\Storage\File\RawStorableFile;
 use Czim\FileHandling\Test\TestCase;
 use org\bovigo\vfs\vfsStream;
+use UnexpectedValueException;
 
 class RawStorableFileTest extends TestCase
 {
@@ -103,6 +105,19 @@ class RawStorableFileTest extends TestCase
         static::assertEquals('contents to be copied', $root->getChild('tmp/copy.txt')->getContent());
     }
 
+    /**
+     * @test
+     */
+    function it_throws_an_exception_on_delete()
+    {
+        $file = new RawStorableFile();
+        $file->setData('contents to be deleted');
+
+        $this->expectException(StorableFileCouldNotBeDeletedException::class);
+
+        $file->delete();
+    }
+
 
     // ------------------------------------------------------------------------------
     //      Specific
@@ -127,10 +142,11 @@ class RawStorableFileTest extends TestCase
 
     /**
      * @test
-     * @expectedException \UnexpectedValueException
      */
     function it_throws_an_exception_if_non_string_data_is_given()
     {
+        $this->expectException(UnexpectedValueException::class);
+
         $file = new RawStorableFile;
 
         $file->setData(['not', 'a string']);

@@ -5,16 +5,16 @@
 	"MGA": {
 		"name": "ariari"
 	},
+	"THB": {
+		"name": "baht tailandes"
+	},
 	"PAB": {
 		"name": "balboa panameño"
-	},
-	"THB": {
-		"name": "bat"
 	},
 	"ETB": {
 		"name": "bir"
 	},
-	"VEF": {
+	"VES": {
 		"name": "bolívar venezolano"
 	},
 	"BOB": {
@@ -168,7 +168,7 @@
 		"name": "dong"
 	},
 	"AMD": {
-		"name": "dram armenio"
+		"name": "dram"
 	},
 	"CVE": {
 		"name": "escudo de Cabo Verde"
@@ -240,6 +240,9 @@
 	"LAK": {
 		"name": "kip"
 	},
+	"ZMW": {
+		"name": "kuacha zambiano"
+	},
 	"AOA": {
 		"name": "kuanza"
 	},
@@ -248,9 +251,6 @@
 	},
 	"MWK": {
 		"name": "kwacha malauí"
-	},
-	"ZMW": {
-		"name": "kwacha zambiano"
 	},
 	"GEL": {
 		"name": "lari"
@@ -321,11 +321,11 @@
 	"MZN": {
 		"name": "metical"
 	},
-	"ERN": {
-		"name": "nafka"
-	},
 	"NGN": {
 		"name": "naira"
+	},
+	"ERN": {
+		"name": "nakfa"
 	},
 	"TWD": {
 		"name": "nuevo dólar taiwanés"
@@ -436,11 +436,11 @@
 	"KGS": {
 		"name": "som"
 	},
+	"UZS": {
+		"name": "som uzbeko"
+	},
 	"TJS": {
 		"name": "somoni tayiko"
-	},
-	"UZS": {
-		"name": "sum"
 	},
 	"BDT": {
 		"name": "taka"
@@ -456,6 +456,9 @@
 	},
 	"MRU": {
 		"name": "uguiya"
+	},
+	"UYW": {
+		"name": "unidad previsional uruguayo"
 	},
 	"VUV": {
 		"name": "vatu"

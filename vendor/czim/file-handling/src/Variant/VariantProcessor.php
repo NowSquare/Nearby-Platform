@@ -37,6 +37,13 @@ class VariantProcessor implements VariantProcessorInterface
      */
     protected $config = [];
 
+    /**
+     * A list of files created while processing that may be cleaned up afterwards.
+     *
+     * @var StorableFileInterface[]
+     */
+    protected $temporaryFiles = [];
+
 
     /**
      * @param StorableFileFactoryInterface    $fileFactory
@@ -68,6 +75,26 @@ class VariantProcessor implements VariantProcessorInterface
         }
 
         return $this;
+    }
+
+    /**
+     * Returns list of temporary files created while processing.
+     *
+     * @return StorableFileInterface[]
+     */
+    public function getTemporaryFiles()
+    {
+        return $this->temporaryFiles;
+    }
+
+    /**
+     * Purges memory of temporary files.
+     *
+     * Note that this does not delete the files, just the processor's history of them.
+     */
+    public function clearTemporaryFiles()
+    {
+        $this->temporaryFiles = [];
     }
 
     /**
@@ -164,6 +191,8 @@ class VariantProcessor implements VariantProcessorInterface
         $file->setMimeType($source->mimeType());
         $file->setData($path);
 
+        $this->rememberTemporaryFile($file);
+
         return $file;
     }
 
@@ -175,6 +204,11 @@ class VariantProcessor implements VariantProcessorInterface
     {
         return sys_get_temp_dir() . '/' . uniqid('filehandling-variant-')
              . ($extension ? ".{$extension}" : null);
+    }
+
+    protected function rememberTemporaryFile(StorableFileInterface $file)
+    {
+        $this->temporaryFiles[] = $file;
     }
 
 }

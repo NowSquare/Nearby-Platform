@@ -812,8 +812,8 @@ trait HasAttributes
     /**
      * Convert a DateTime to a storable string.
      *
-     * @param  \DateTime|int  $value
-     * @return string
+     * @param  mixed  $value
+     * @return string|null
      */
     public function fromDateTime($value)
     {
@@ -1010,7 +1010,22 @@ trait HasAttributes
      */
     public function syncOriginalAttribute($attribute)
     {
-        $this->original[$attribute] = $this->attributes[$attribute];
+        return $this->syncOriginalAttributes($attribute);
+    }
+
+    /**
+     * Sync multiple original attribute with their current values.
+     *
+     * @param  array|string  $attributes
+     * @return $this
+     */
+    public function syncOriginalAttributes($attributes)
+    {
+        $attributes = is_array($attributes) ? $attributes : func_get_args();
+
+        foreach ($attributes as $attribute) {
+            $this->original[$attribute] = $this->attributes[$attribute];
+        }
 
         return $this;
     }
@@ -1028,7 +1043,7 @@ trait HasAttributes
     }
 
     /**
-     * Determine if the model or given attribute(s) have been modified.
+     * Determine if the model or any of the given attribute(s) have been modified.
      *
      * @param  array|string|null  $attributes
      * @return bool
@@ -1041,7 +1056,7 @@ trait HasAttributes
     }
 
     /**
-     * Determine if the model or given attribute(s) have remained the same.
+     * Determine if the model and all the given attribute(s) have remained the same.
      *
      * @param  array|string|null  $attributes
      * @return bool
@@ -1052,7 +1067,7 @@ trait HasAttributes
     }
 
     /**
-     * Determine if the model or given attribute(s) have been modified.
+     * Determine if the model or any of the given attribute(s) have been modified.
      *
      * @param  array|string|null  $attributes
      * @return bool
@@ -1065,7 +1080,7 @@ trait HasAttributes
     }
 
     /**
-     * Determine if the given attributes were changed.
+     * Determine if any of the given attributes were changed.
      *
      * @param  array  $changes
      * @param  array|string|null  $attributes

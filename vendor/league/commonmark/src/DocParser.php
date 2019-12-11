@@ -18,7 +18,6 @@ use League\CommonMark\Block\Element\AbstractBlock;
 use League\CommonMark\Block\Element\Document;
 use League\CommonMark\Block\Element\InlineContainerInterface;
 use League\CommonMark\Block\Element\Paragraph;
-use League\CommonMark\Node\NodeWalker;
 
 class DocParser
 {
@@ -95,7 +94,7 @@ class DocParser
             $tip->finalize($context, $lineCount);
         }
 
-        $this->processInlines($context, $context->getDocument()->walker());
+        $this->processInlines($context);
 
         $this->processDocument($context);
 
@@ -148,8 +147,10 @@ class DocParser
         }
     }
 
-    private function processInlines(ContextInterface $context, NodeWalker $walker)
+    private function processInlines(ContextInterface $context)
     {
+        $walker = $context->getDocument()->walker();
+
         while ($event = $walker->next()) {
             if (!$event->isEntering()) {
                 continue;
@@ -173,6 +174,10 @@ class DocParser
         $container = $context->getDocument();
 
         while ($lastChild = $container->lastChild()) {
+            if (!($lastChild instanceof AbstractBlock)) {
+                break;
+            }
+
             if (!$lastChild->isOpen()) {
                 break;
             }
@@ -242,7 +247,7 @@ class DocParser
         $lastLineBlank = $container->shouldLastLineBeBlank($cursor, $context->getLineNumber());
 
         // Propagate lastLineBlank up through parents:
-        while ($container) {
+        while ($container instanceof AbstractBlock) {
             $container->setLastLineBlank($lastLineBlank);
             $container = $container->parent();
         }
